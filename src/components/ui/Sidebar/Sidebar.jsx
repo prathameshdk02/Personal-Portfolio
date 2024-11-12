@@ -21,7 +21,7 @@ const Sidebar = ({ isMobile }) => {
   };
 
   return (
-    <nav className="absolute right-6 top-6 sm:right-10 sm:top-10 text-white">
+    <nav className="absolute right-8 top-8 sm:right-10 sm:top-10 text-white">
       {isMobile && !isOpen && (
         <FontAwesomeIcon icon={faBarsStaggered} className="size-5" onClick={toggleMobileSidebar} />
       )}
@@ -33,13 +33,13 @@ const Sidebar = ({ isMobile }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="glassy-slide-down fixed w-full top-0 left-1/2 rounded-b-lg transform -translate-x-1/2 p-6">
+            className="glassy-slide-down fixed w-full h-full top-0 left-1/2 rounded-b-lg transform -translate-x-1/2 p-6 z-10">
             <FontAwesomeIcon
               icon={faXmark}
               className="size-5 absolute right-6 top-6"
               onClick={toggleMobileSidebar}
             />
-            <motion.h2 className="text-3xl text-primaryhead font-semibold">Navigation</motion.h2>
+            <motion.h2 className="text-3xl text-primaryhead font-bold">Navigation</motion.h2>
             <motion.h2 className="text-2xl text-secondaryhead mb-4">Go To</motion.h2>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
@@ -183,7 +183,7 @@ const Sidebar = ({ isMobile }) => {
                   `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
                 }>
                 <FontAwesomeIcon icon={faHouse} className="size-5"></FontAwesomeIcon>
-                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400">
+                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   Home
                 </span>
               </NavLink>
@@ -198,7 +198,7 @@ const Sidebar = ({ isMobile }) => {
                   `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
                 }>
                 <FontAwesomeIcon icon={faUser} className="size-5"></FontAwesomeIcon>
-                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400">
+                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   Bio
                 </span>
               </NavLink>
@@ -213,7 +213,7 @@ const Sidebar = ({ isMobile }) => {
                   `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
                 }>
                 <FontAwesomeIcon icon={faLightbulb} className="size-5"></FontAwesomeIcon>
-                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400">
+                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   Interests
                 </span>
               </NavLink>
@@ -228,7 +228,7 @@ const Sidebar = ({ isMobile }) => {
                   `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
                 }>
                 <FontAwesomeIcon icon={faScrewdriverWrench} className="size-5"></FontAwesomeIcon>
-                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400">
+                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   Projects
                 </span>
               </NavLink>
@@ -243,7 +243,7 @@ const Sidebar = ({ isMobile }) => {
                   `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
                 }>
                 <FontAwesomeIcon icon={faAddressCard} className="size-5"></FontAwesomeIcon>
-                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400">
+                <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   Contact
                 </span>
               </NavLink>

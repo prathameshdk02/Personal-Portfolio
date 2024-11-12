@@ -10,6 +10,8 @@ import Interests from './pages/Interests';
 import Projects from './pages/Projects';
 import ContactMe from './pages/ContactMe';
 
+const MOBILE_BREAKPOINT = 768;
+
 function App() {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
 
