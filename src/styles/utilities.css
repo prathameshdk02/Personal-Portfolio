@@ -1,5 +1,9 @@
 /* Custom Tailwind Classes for Use. */
 
+html{
+  scroll-behavior: smooth;
+}
+
 body {
   @apply min-h-svh;
 }

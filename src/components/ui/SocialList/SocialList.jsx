@@ -1,21 +1,51 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
+const wrapperVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: -20 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+    },
+  },
+};
+
 const SocialList = ({ className }) => {
   return (
-    <div className={`flex gap-4 ${className}`}>
-      <a href="https://www.linkedin.com/in/prathamesh-kadve-9948ba232/" target="_blank">
+    <motion.div
+      variants={wrapperVariants}
+      initial="hidden"
+      animate="show"
+      className={`flex gap-5 ${className}`}>
+      <motion.a
+        variants={itemVariants}
+        href="https://www.linkedin.com/in/prathamesh-kadve-9948ba232"
+        target="_blank">
         <FontAwesomeIcon className="size-6 text-primaryhead" icon={faLinkedin} />
-      </a>
-      <a href="https://github.com/prathameshdk02" target="_blank">
+      </motion.a>
+      <motion.a variants={itemVariants} href="https://github.com/prathameshdk02" target="_blank">
         <FontAwesomeIcon className="size-6 text-primaryhead" icon={faGithub} />
-      </a>
-      <a href="https://x.com/prathameshdk02" target="_blank">
+      </motion.a>
+      <motion.a variants={itemVariants} href="https://x.com/prathameshdk02" target="_blank">
         <FontAwesomeIcon className="size-6 text-primaryhead" icon={faTwitter} />
-      </a>
-    </div>
+      </motion.a>
+    </motion.div>
   );
 };
 

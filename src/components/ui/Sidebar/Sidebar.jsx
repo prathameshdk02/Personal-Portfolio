@@ -6,12 +6,39 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons/faBarsStaggered';
 import { faLeftLong, faHouse, faScrewdriverWrench, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faUser, faLightbulb, faAddressCard } from '@fortawesome/free-regular-svg-icons';
+import { span } from 'framer-motion/client';
 
 const HOME_URL = '/';
 const BIO_URL = '/bio';
 const INTERESTS_URL = '/interests';
 const PROJECTS_URL = '/projects';
 const CONTACTME_URL = '/contact';
+
+const parentNavVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 1.5,
+      delay: 1,
+    },
+  },
+};
+
+const childNavVariants = {
+  hidden: { opacity: 0, scale: 0.5 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      duration: 0.4,
+      type: 'spring',
+      stiffness: 100,
+      damping: 7,
+    },
+  },
+};
 
 const Sidebar = ({ isMobile }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,9 +48,15 @@ const Sidebar = ({ isMobile }) => {
   };
 
   return (
-    <nav className="absolute right-8 top-8 sm:right-10 sm:top-10 text-white">
+    <nav className="absolute right-8 top-8 md:right-10 md:top-10 text-white">
       {isMobile && !isOpen && (
-        <FontAwesomeIcon icon={faBarsStaggered} className="size-5" onClick={toggleMobileSidebar} />
+        <motion.span
+          className="inline-block" 
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.5, type: 'spring', stiffness: 100, damping: 7 }}>
+          <FontAwesomeIcon icon={faBarsStaggered} className="size-5" onClick={toggleMobileSidebar} />
+        </motion.span>
       )}
 
       <AnimatePresence>
@@ -172,8 +205,12 @@ const Sidebar = ({ isMobile }) => {
 
       {!isMobile && (
         <AnimatePresence>
-          <ul className="flex justify-evenly gap-2 p-3 px-4 min-w-72 rounded-3xl border border-glassyedge">
-            <li>
+          <motion.ul
+            variants={parentNavVariants}
+            initial="hidden"
+            animate="show"
+            className="flex justify-evenly gap-2 p-3 px-4 min-w-72 rounded-3xl border border-glassyedge">
+            <motion.li variants={childNavVariants}>
               <NavLink
                 to={HOME_URL}
                 onClick={() => {
@@ -187,8 +224,8 @@ const Sidebar = ({ isMobile }) => {
                   Home
                 </span>
               </NavLink>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={childNavVariants}>
               <NavLink
                 to={BIO_URL}
                 onClick={() => {
@@ -202,8 +239,8 @@ const Sidebar = ({ isMobile }) => {
                   Bio
                 </span>
               </NavLink>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={childNavVariants}>
               <NavLink
                 to={INTERESTS_URL}
                 onClick={() => {
@@ -217,8 +254,8 @@ const Sidebar = ({ isMobile }) => {
                   Interests
                 </span>
               </NavLink>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={childNavVariants}>
               <NavLink
                 to={PROJECTS_URL}
                 onClick={() => {
@@ -232,8 +269,8 @@ const Sidebar = ({ isMobile }) => {
                   Projects
                 </span>
               </NavLink>
-            </li>
-            <li>
+            </motion.li>
+            <motion.li variants={childNavVariants}>
               <NavLink
                 to={CONTACTME_URL}
                 onClick={() => {
@@ -247,8 +284,8 @@ const Sidebar = ({ isMobile }) => {
                   Contact
                 </span>
               </NavLink>
-            </li>
-          </ul>
+            </motion.li>
+          </motion.ul>
         </AnimatePresence>
       )}
     </nav>

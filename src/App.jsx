@@ -13,10 +13,10 @@ import ContactMe from './pages/ContactMe';
 const MOBILE_BREAKPOINT = 768;
 
 function App() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT);
 
   const handleResize = useDebounce(() => {
-    setIsMobile(window.innerWidth < 640);
+    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
   }, 400);
 
   useEffect(() => {
