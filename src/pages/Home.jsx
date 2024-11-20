@@ -9,7 +9,6 @@ const SECTION_COUNT = 4;
 const Home = () => {
   const [currentSection, setCurrentSection] = useState(1);
 
-
   const handleSectionChange = useDebounce((event) => {
     if (event.deltaY > 0 && currentSection < SECTION_COUNT) {
       setCurrentSection((prev) => prev + 1);
@@ -24,38 +23,22 @@ const Home = () => {
   };
 
   useEffect(() => {
-    const main = document.getElementById('main-glassy');
-
     const section = document.getElementsByClassName(`home-${currentSection}`)[0];
-    
+
     section.scrollIntoView({ behaviour: 'smooth', block: 'start' });
-
-    if (currentSection == 1) {
-      main.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-      return;
-    }
   }, [currentSection]);
 
   useEffect(() => {
-    const main = document.getElementById('main-glassy');
-
-    main.addEventListener('wheel', handleWheelEvent, { passive: false });
+    window.addEventListener('wheel', handleWheelEvent, { passive: false });
 
     return () => {
-      main.removeEventListener('wheel', handleWheelEvent);
+      window.removeEventListener('wheel', handleWheelEvent);
     };
   }, [currentSection]);
+
   return (
     <>
-      <section className="home-1 min-h-svh pt-20 sm:pt-40 text-slate-100">
+      <section className="home-1 border border-red-500 min-h-[95svh] max-h-[95svh] pt-20 sm:pt-40 text-slate-100">
         <article className="flex flex-col items-center gap-20 sm:gap-8 sm:flex-row">
           <div className="space-y-1 self-center flex-1">
             <motion.h2
@@ -109,7 +92,7 @@ const Home = () => {
           </motion.div>
         </article>
       </section>
-      <section className="home-2 min-h-svh pt-12 mt-8 sm:mt-0 text-slate-100">
+      <section className="home-2 border border-red-500 min-h-[95svh] max-h-[95svh] pt-12 mt-8 sm:mt-0 text-slate-100">
         <motion.article
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -119,7 +102,7 @@ const Home = () => {
           About Me
         </motion.article>
       </section>
-      <section className="home-3 min-h-svh pt-12 text-slate-100">
+      <section className="home-3 border border-red-500 min-h-[95svh] max-h-[95svh] pt-12 text-slate-100">
         <motion.article
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -129,7 +112,7 @@ const Home = () => {
           Work Experience
         </motion.article>
       </section>
-      <section className="home-4 min-h-svh pt-12 text-slate-100">
+      <section className="home-4 border border-red-500 min-h-[95svh] max-h-[95svh] pt-12 text-slate-100">
         <motion.article
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
