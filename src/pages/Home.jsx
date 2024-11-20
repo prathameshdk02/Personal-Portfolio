@@ -9,13 +9,14 @@ const SECTION_COUNT = 4;
 const Home = () => {
   const [currentSection, setCurrentSection] = useState(1);
 
+
   const handleSectionChange = useDebounce((event) => {
     if (event.deltaY > 0 && currentSection < SECTION_COUNT) {
       setCurrentSection((prev) => prev + 1);
     } else if (event.deltaY < 0 && currentSection > 1) {
       setCurrentSection((prev) => prev - 1);
     }
-  }, 150);
+  }, 200);
 
   const handleWheelEvent = (event) => {
     event.preventDefault();
@@ -23,23 +24,33 @@ const Home = () => {
   };
 
   useEffect(() => {
+    const main = document.getElementById('main-glassy');
+
+    const section = document.getElementsByClassName(`home-${currentSection}`)[0];
+    
+    section.scrollIntoView({ behaviour: 'smooth', block: 'start' });
+
     if (currentSection == 1) {
+      main.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
       return;
     }
-    const section = document.getElementsByClassName(`home-${currentSection}`)[0];
-
-    section.scrollIntoView({ behaviour: 'smooth', block: 'start' });
   }, [currentSection]);
 
   useEffect(() => {
-    window.addEventListener('wheel', handleWheelEvent, { passive: false });
+    const main = document.getElementById('main-glassy');
+
+    main.addEventListener('wheel', handleWheelEvent, { passive: false });
 
     return () => {
-      window.removeEventListener('wheel', handleWheelEvent);
+      main.removeEventListener('wheel', handleWheelEvent);
     };
   }, [currentSection]);
   return (
