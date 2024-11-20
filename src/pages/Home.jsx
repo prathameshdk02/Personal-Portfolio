@@ -38,8 +38,8 @@ const Home = () => {
 
   return (
     <>
-      <section className="home-1 border border-red-500 min-h-[95svh] max-h-[95svh] pt-20 sm:pt-40 text-slate-100">
-        <article className="flex flex-col items-center gap-20 sm:gap-8 sm:flex-row">
+      <section className="home-1 min-h-svh md:min-h-[95svh] pt-20 sm:pt-0 text-slate-100 sm:flex sm:justify-center sm:align-center">
+        <article className="w-full flex flex-col items-center gap-20 sm:gap-8 sm:flex-row pt-8 sm:pt-0">
           <div className="space-y-1 self-center flex-1">
             <motion.h2
               initial={{ opacity: 0 }}
@@ -92,33 +92,33 @@ const Home = () => {
           </motion.div>
         </article>
       </section>
-      <section className="home-2 border border-red-500 min-h-[95svh] max-h-[95svh] pt-12 mt-8 sm:mt-0 text-slate-100">
+      <section className="home-2 min-h-svh md:min-h-[95svh] pt-12 mt-14 sm:mt-0 text-slate-100">
         <motion.article
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true, amount: 1 }}
-          className="text-4xl lg:text-[2.5rem] xl:text-5xl">
+          className="text-4xl lg:text-[2.5rem] xl:text-5xl font-semibold">
           About Me
         </motion.article>
       </section>
-      <section className="home-3 border border-red-500 min-h-[95svh] max-h-[95svh] pt-12 text-slate-100">
+      <section className="home-3 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
         <motion.article
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true, amount: 1 }}
-          className="text-4xl lg:text-[2.5rem] xl:text-5xl">
+          className="text-4xl lg:text-[2.5rem] xl:text-5xl font-semibold">
           Work Experience
         </motion.article>
       </section>
-      <section className="home-4 border border-red-500 min-h-[95svh] max-h-[95svh] pt-12 text-slate-100">
+      <section className="home-4 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
         <motion.article
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true, amount: 1 }}
-          className="text-4xl lg:text-[2.5rem] xl:text-5xl">
+          className="text-4xl lg:text-[2.5rem] xl:text-5xl font-semibold">
           Projects
         </motion.article>
       </section>
