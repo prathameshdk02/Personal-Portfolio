@@ -4,10 +4,12 @@ import { ReactTyped } from 'react-typed';
 
 import { useDebounce } from '../hooks/useDebounce';
 
-const SECTION_COUNT = 4;
+let SECTION_COUNT = 0;
 
 const Home = () => {
   const [currentSection, setCurrentSection] = useState(1);
+
+  let touchStart = 0;
 
   const handleSectionChange = useDebounce((event) => {
     if (event.deltaY > 0 && currentSection < SECTION_COUNT) {
@@ -22,19 +24,49 @@ const Home = () => {
     handleSectionChange(event);
   };
 
+  const handleTouchStart = (event) => {
+    touchStart = event.touches[0].clientY;
+  };
+
+  const handleTouchMove = (event) => {
+    const deltaY = touchStart - event.touches[0].clientY;
+
+    if (touchStart < 100 && deltaY < -200 && currentSection == 1) {
+      location.reload();
+      return;
+    }
+
+    if (Math.abs(deltaY) > 5) {
+      if (event.cancelable) {
+        event.preventDefault();
+        handleSectionChange({ deltaY });
+      }
+    }
+  };
+
+  useEffect(() => {
+    // Updates the number of sections
+    SECTION_COUNT = document.querySelectorAll('section[class*="home-"]').length;
+  }, []);
+
   useEffect(() => {
     const section = document.getElementsByClassName(`home-${currentSection}`)[0];
 
     section.scrollIntoView({ behaviour: 'smooth', block: 'start' });
   }, [currentSection]);
 
+
   useEffect(() => {
     window.addEventListener('wheel', handleWheelEvent, { passive: false });
+    window.addEventListener('touchstart', handleTouchStart);
+    window.addEventListener('touchmove', handleTouchMove, { passive: false });
 
     return () => {
       window.removeEventListener('wheel', handleWheelEvent);
+      window.removeEventListener('touchstart', handleTouchStart);
+      window.removeEventListener('touchmove', handleTouchMove);
     };
-  }, [currentSection]);
+  },[currentSection]);
 
   return (
     <>
