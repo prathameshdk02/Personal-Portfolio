@@ -127,34 +127,40 @@ const Home = () => {
         </article>
       </section>
       <section className="home-2 min-h-svh md:min-h-[95svh] pt-12 mt-14 sm:mt-0 text-slate-100">
-        <motion.article
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true, amount: 1 }}
-          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
-          About Me
-        </motion.article>
+        <article>
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true, amount: 1 }}
+            className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
+            About Me
+          </motion.h2>
+        </article>
       </section>
       <section className="home-3 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
-        <motion.article
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true, amount: 1 }}
-          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
-          Work Experience
-        </motion.article>
+        <article>
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true, amount: 1 }}
+            className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
+            Work Experience
+          </motion.h2>
+        </article>
       </section>
       <section className="home-4 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
-        <motion.article
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
-          viewport={{ once: true, amount: 1 }}
-          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
-          Projects
-        </motion.article>
+        <article>
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true, amount: 1 }}
+            className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
+            Projects
+          </motion.h2>
+        </article>
       </section>
     </>
   );
