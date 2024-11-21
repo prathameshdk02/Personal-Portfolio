@@ -19,6 +19,7 @@ const Home = () => {
     }
   }, 200);
 
+  // Event Handlers
   const handleWheelEvent = (event) => {
     event.preventDefault();
     handleSectionChange(event);
@@ -44,18 +45,19 @@ const Home = () => {
     }
   };
 
+  // Updates the number of sections when components mounts
   useEffect(() => {
-    // Updates the number of sections
     SECTION_COUNT = document.querySelectorAll('section[class*="home-"]').length;
   }, []);
 
+  // Scrolls to the currentSection smoothly
   useEffect(() => {
     const section = document.getElementsByClassName(`home-${currentSection}`)[0];
 
     section.scrollIntoView({ behaviour: 'smooth', block: 'start' });
   }, [currentSection]);
 
-
+  // Adding & removing Event listeners along rerenders
   useEffect(() => {
     window.addEventListener('wheel', handleWheelEvent, { passive: false });
     window.addEventListener('touchstart', handleTouchStart);
@@ -66,7 +68,7 @@ const Home = () => {
       window.removeEventListener('touchstart', handleTouchStart);
       window.removeEventListener('touchmove', handleTouchMove);
     };
-  },[currentSection]);
+  }, [currentSection]);
 
   return (
     <>
@@ -130,7 +132,7 @@ const Home = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true, amount: 1 }}
-          className="text-4xl lg:text-[2.5rem] xl:text-5xl font-semibold">
+          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
           About Me
         </motion.article>
       </section>
@@ -140,7 +142,7 @@ const Home = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true, amount: 1 }}
-          className="text-4xl lg:text-[2.5rem] xl:text-5xl font-semibold">
+          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
           Work Experience
         </motion.article>
       </section>
@@ -150,7 +152,7 @@ const Home = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
           viewport={{ once: true, amount: 1 }}
-          className="text-4xl lg:text-[2.5rem] xl:text-5xl font-semibold">
+          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
           Projects
         </motion.article>
       </section>
