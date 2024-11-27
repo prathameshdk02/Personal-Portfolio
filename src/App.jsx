@@ -24,14 +24,14 @@ function App() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <>
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout isMobile={isMobile} />}>
-            <Route index element={<Home />}></Route>
+            <Route index element={<Home isMobile={isMobile} />}></Route>
             <Route path="/bio" element={<Bio />}></Route>
             <Route path="/interests" element={<Interests />}></Route>
             <Route path="/projects" element={<Projects />}></Route>

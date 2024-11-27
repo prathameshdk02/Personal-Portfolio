@@ -3,5 +3,9 @@
   --primarybg: 35, 35, 35;
   --primaryhead: 220, 220, 220;
   --secondaryhead: 100, 100, 100;
-  --glassy-edge: 255, 255, 255
+  --glassy-edge: 255, 255, 255;
+  --cardbg: 28, 26, 25;
+  --cardbghover: 28, 26, 25;
+  --primarytext: 220, 220, 220;
+  --secondarytext: 180, 180, 180;
 }

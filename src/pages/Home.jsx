@@ -2,47 +2,32 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ReactTyped } from 'react-typed';
 
+import { faBook, faLocationDot } from '@fortawesome/free-solid-svg-icons';
+import { faComment, faUser, faLightbulb } from '@fortawesome/free-regular-svg-icons';
+import { faInfoCircle, faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons';
+
 import { useDebounce } from '../hooks/useDebounce';
+import { cardWhileHover, fadeIn } from '../styles/motion/animations';
+
+import Card from '../components/ui/Card/Card';
+import InfoCard from '../components/ui/InfoCard/InfoCard';
 
 let SECTION_COUNT = 0;
 
-const Home = () => {
+const Home = ({ isMobile }) => {
   const [currentSection, setCurrentSection] = useState(1);
 
-  let touchStart = 0;
-
-  const handleSectionChange = useDebounce((event) => {
-    if (event.deltaY > 0 && currentSection < SECTION_COUNT) {
+  const handleDTSectionChange = useDebounce(() => {
+    if (currentSection < SECTION_COUNT) {
       setCurrentSection((prev) => prev + 1);
-    } else if (event.deltaY < 0 && currentSection > 1) {
-      setCurrentSection((prev) => prev - 1);
+    } else {
+      setCurrentSection(1);
     }
-  }, 200);
+  });
 
   // Event Handlers
-  const handleWheelEvent = (event) => {
-    event.preventDefault();
-    handleSectionChange(event);
-  };
-
-  const handleTouchStart = (event) => {
-    touchStart = event.touches[0].clientY;
-  };
-
-  const handleTouchMove = (event) => {
-    const deltaY = touchStart - event.touches[0].clientY;
-
-    if (touchStart < 100 && deltaY < -200 && currentSection == 1) {
-      location.reload();
-      return;
-    }
-
-    if (Math.abs(deltaY) > 5) {
-      if (event.cancelable) {
-        event.preventDefault();
-        handleSectionChange({ deltaY });
-      }
-    }
+  const handleDoubleClick = () => {
+    handleDTSectionChange();
   };
 
   // Updates the number of sections when components mounts
@@ -59,14 +44,10 @@ const Home = () => {
 
   // Adding & removing Event listeners along rerenders
   useEffect(() => {
-    window.addEventListener('wheel', handleWheelEvent, { passive: false });
-    window.addEventListener('touchstart', handleTouchStart);
-    window.addEventListener('touchmove', handleTouchMove, { passive: false });
+    window.addEventListener('dblclick', handleDoubleClick);
 
     return () => {
-      window.removeEventListener('wheel', handleWheelEvent);
-      window.removeEventListener('touchstart', handleTouchStart);
-      window.removeEventListener('touchmove', handleTouchMove);
+      window.removeEventListener('dblclick', handleDoubleClick);
     };
   }, [currentSection]);
 
@@ -106,7 +87,6 @@ const Home = () => {
                   'Full Stack Web Developer',
                 ]}></ReactTyped>
             </motion.div>
-            {/* <h2 className="text-4xl lg:text-[2.75rem] xl:text-5xl text-secondaryhead font-extrabold !mt-2">Full Stack Web Developer</h2> */}
           </div>
           <motion.div
             initial={{ opacity: 0 }}
@@ -126,41 +106,105 @@ const Home = () => {
           </motion.div>
         </article>
       </section>
-      <section className="home-2 min-h-svh md:min-h-[95svh] pt-12 mt-14 sm:mt-0 text-slate-100">
-        <article>
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true, amount: 1 }}
-            className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
-            About Me
-          </motion.h2>
-        </article>
+      <section className="home-2 pt-12 mt-14 sm:mt-0 min-h-svh md:min-h-[95svh] text-slate-100 space-y-10">
+        <motion.h2
+          variants={fadeIn}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true, amount: 1 }}
+          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
+          About Me
+        </motion.h2>
+        <motion.section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Card
+            // whileHover={cardWhileHover}
+            variants={fadeIn}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="sm:col-span-2"
+            cardIcon={faUser}>
+            <h4 className="text-xl font-semibold">Bio</h4>
+            <p className="text-secondarytext">
+              A Geek, passionate about Web Development.
+              <br /> Self-taught Full Stack Web Developer.
+              <br /> Currently exploring the web domain & the wonders it can bring about.
+              <br /> Consistent Performer, Consistent Learner & Hardworking.
+            </p>
+          </Card>
+          <Card
+            // whileHover={cardWhileHover}
+            variants={fadeIn}
+            transition={{ duration: 0.5, delay: isMobile ? 0.1 : 0.4 }}
+            cardIcon={faBook}>
+            <h4 className="text-xl font-semibold">Education</h4>
+            <p className="text-secondarytext flex-1 flex items-center">
+              Bachelor in Computer Engineering (B.E)
+              <br />
+              University Of Mumbai
+            </p>
+            <footer className="text-primarytext">2024</footer>
+          </Card>
+          <Card
+            // whileHover={cardWhileHover}
+            variants={fadeIn}
+            transition={{ duration: 0.5, delay: isMobile ? 0.1 : 0.6 }}
+            cardIcon={faLocationDot}>
+            <h4 className="text-xl font-semibold">Based In</h4>
+            <p className="text-secondarytext flex-1 flex items-center">
+              Uran,
+              <br />
+              Navi Mumbai
+            </p>
+            <footer className="text-primarytext">Maharashtra, India</footer>
+          </Card>
+          <Card
+            // whileHover={cardWhileHover}
+            variants={fadeIn}
+            transition={{ duration: 0.5, delay: isMobile ? 0.1 : 0.8 }}
+            cardIcon={faLightbulb}>
+            <h4 className="text-xl font-semibold">Hobbies</h4>
+            <p className="text-secondarytext">
+              Swimming
+              <br />
+              Playing Video Games <br />
+              Building PCs
+            </p>
+          </Card>
+          <Card
+            // whileHover={cardWhileHover}
+            variants={fadeIn}
+            transition={{ duration: 0.5, delay: isMobile ? 0.1 : 1 }}
+            cardIcon={faComment}>
+            <h4 className="text-xl font-semibold">Thoughts</h4>
+            <p className="text-secondarytext">"Curiosity leads to perfection."</p>
+          </Card>
+        </motion.section>
+        <InfoCard
+          text="Know More About Me?"
+          hoverText={'Visit Bio Section to Know More.'}
+          textIcon={faInfoCircle}
+          hoverTextIcon={faArrowUpRightFromSquare}
+          isMobile={isMobile}
+          navigateTo={"/bio"}></InfoCard>
       </section>
       <section className="home-3 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
-        <article>
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true, amount: 1 }}
-            className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
-            Work Experience
-          </motion.h2>
-        </article>
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true, amount: 1 }}
+          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
+          Work Experience
+        </motion.h2>
       </section>
       <section className="home-4 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
-        <article>
-          <motion.h2
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true, amount: 1 }}
-            className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
-            Projects
-          </motion.h2>
-        </article>
+        <motion.h2
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.3 }}
+          viewport={{ once: true, amount: 1 }}
+          className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
+          Projects
+        </motion.h2>
       </section>
     </>
   );
