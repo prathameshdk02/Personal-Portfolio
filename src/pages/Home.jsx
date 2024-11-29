@@ -11,6 +11,7 @@ import { cardWhileHover, fadeIn } from '../styles/motion/animations';
 
 import Card from '../components/ui/Card/Card';
 import InfoCard from '../components/ui/InfoCard/InfoCard';
+import Timeline, { TimeElement } from '../components/ui/Timeline/Timeline';
 
 let SECTION_COUNT = 0;
 
@@ -20,15 +21,10 @@ const Home = ({ isMobile }) => {
   const handleDTSectionChange = useDebounce(() => {
     if (currentSection < SECTION_COUNT) {
       setCurrentSection((prev) => prev + 1);
-    } else {
-      setCurrentSection(1);
+      return;
     }
+    setCurrentSection(1);
   });
-
-  // Event Handlers
-  const handleDoubleClick = () => {
-    handleDTSectionChange();
-  };
 
   // Updates the number of sections when components mounts
   useEffect(() => {
@@ -42,18 +38,11 @@ const Home = ({ isMobile }) => {
     section.scrollIntoView({ behaviour: 'smooth', block: 'start' });
   }, [currentSection]);
 
-  // Adding & removing Event listeners along rerenders
-  useEffect(() => {
-    window.addEventListener('dblclick', handleDoubleClick);
-
-    return () => {
-      window.removeEventListener('dblclick', handleDoubleClick);
-    };
-  }, [currentSection]);
-
   return (
     <>
-      <section className="home-1 min-h-svh md:min-h-[95svh] pt-20 sm:pt-0 text-slate-100 sm:flex sm:justify-center sm:align-center">
+      <section
+        onDoubleClick={handleDTSectionChange}
+        className="home-1 min-h-svh md:min-h-[95svh] pt-20 sm:pt-0 text-slate-100 sm:flex sm:justify-center sm:align-center">
         <article className="w-full flex flex-col items-center gap-20 sm:gap-8 sm:flex-row pt-8 sm:pt-0">
           <div className="space-y-1 self-center flex-1">
             <motion.h2
@@ -106,7 +95,9 @@ const Home = ({ isMobile }) => {
           </motion.div>
         </article>
       </section>
-      <section className="home-2 pt-12 mt-14 sm:mt-0 min-h-svh md:min-h-[95svh] text-slate-100 space-y-10">
+      <section
+        onDoubleClick={handleDTSectionChange}
+        className="home-2 pt-12 mt-14 sm:mt-0 min-h-svh md:min-h-[95svh] text-slate-100 space-y-10">
         <motion.h2
           variants={fadeIn}
           initial="initial"
@@ -117,7 +108,7 @@ const Home = ({ isMobile }) => {
         </motion.h2>
         <motion.section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           <Card
-            // whileHover={cardWhileHover}
+            whileHover={cardWhileHover}
             variants={fadeIn}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="sm:col-span-2"
@@ -131,7 +122,7 @@ const Home = ({ isMobile }) => {
             </p>
           </Card>
           <Card
-            // whileHover={cardWhileHover}
+            whileHover={cardWhileHover}
             variants={fadeIn}
             transition={{ duration: 0.5, delay: isMobile ? 0.1 : 0.4 }}
             cardIcon={faBook}>
@@ -144,7 +135,7 @@ const Home = ({ isMobile }) => {
             <footer className="text-primarytext">2024</footer>
           </Card>
           <Card
-            // whileHover={cardWhileHover}
+            whileHover={cardWhileHover}
             variants={fadeIn}
             transition={{ duration: 0.5, delay: isMobile ? 0.1 : 0.6 }}
             cardIcon={faLocationDot}>
@@ -157,7 +148,7 @@ const Home = ({ isMobile }) => {
             <footer className="text-primarytext">Maharashtra, India</footer>
           </Card>
           <Card
-            // whileHover={cardWhileHover}
+            whileHover={cardWhileHover}
             variants={fadeIn}
             transition={{ duration: 0.5, delay: isMobile ? 0.1 : 0.8 }}
             cardIcon={faLightbulb}>
@@ -170,7 +161,7 @@ const Home = ({ isMobile }) => {
             </p>
           </Card>
           <Card
-            // whileHover={cardWhileHover}
+            whileHover={cardWhileHover}
             variants={fadeIn}
             transition={{ duration: 0.5, delay: isMobile ? 0.1 : 1 }}
             cardIcon={faComment}>
@@ -184,9 +175,11 @@ const Home = ({ isMobile }) => {
           textIcon={faInfoCircle}
           hoverTextIcon={faArrowUpRightFromSquare}
           isMobile={isMobile}
-          navigateTo={"/bio"}></InfoCard>
+          navigateTo={'/bio'}></InfoCard>
       </section>
-      <section className="home-3 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
+      <section
+        onDoubleClick={handleDTSectionChange}
+        className="home-3 flex flex-col gap-10 pt-12 text-slate-100">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -195,8 +188,38 @@ const Home = ({ isMobile }) => {
           className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
           Work Experience
         </motion.h2>
+        {/* Render the Work Experience Timeline */}
+        <Timeline>
+          <TimeElement>
+            <h3 className="text-sm text-secondarytext">June 2023 - July 2023</h3>
+            <h2 className="text-lg text-primaryhead font-semibold">Machine Learning Intern</h2>
+            <h3 className="text-sm text-secondarytext font-medium">Yhills Edutech</h3>
+            <p className="text-primarytext text-base">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque tenetur laudantium minus
+              quas mollitia adipisci impedit ratione modi, minima expedita!
+            </p>
+          </TimeElement>
+          <TimeElement>
+            <h3 className="text-sm text-secondarytext">June 2024 - July 2024</h3>
+            <h2 className="text-lg text-primaryhead font-semibold">Jr. Software Developer Intern</h2>
+            <h3 className="text-sm text-secondarytext font-medium">Sciative Solutions</h3>
+            <p className="text-primarytext text-base">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque tenetur laudantium minus
+              quas mollitia adipisci impedit ratione modi, minima expedita!
+            </p>
+          </TimeElement>
+        </Timeline>
+        <InfoCard
+          text="Reach out to me?"
+          hoverText={'Visit Contact Section to Know How.'}
+          textIcon={faInfoCircle}
+          hoverTextIcon={faArrowUpRightFromSquare}
+          isMobile={isMobile}
+          navigateTo={'/contact'}></InfoCard>
       </section>
-      <section className="home-4 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
+      <section
+        onDoubleClick={handleDTSectionChange}
+        className="home-4 min-h-svh md:min-h-[95svh] pt-12 text-slate-100">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}

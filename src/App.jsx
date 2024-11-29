@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+
+import Loader from './components/ui/Loader/Loader';
 
 import { useDebounce } from './hooks/useDebounce';
+import { LoaderContextProvider } from './context/LoaderContext';
 
 import Layout from './components/ui/Layout/Layout';
 import Home from './pages/Home';
@@ -28,17 +32,22 @@ function App() {
 
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Layout isMobile={isMobile} />}>
-            <Route index element={<Home isMobile={isMobile} />}></Route>
-            <Route path="/bio" element={<Bio />}></Route>
-            <Route path="/interests" element={<Interests />}></Route>
-            <Route path="/projects" element={<Projects />}></Route>
-            <Route path="/contact" element={<ContactMe />}></Route>
-          </Route>
-        </Routes>
-      </BrowserRouter>
+      <LoaderContextProvider>
+        <AnimatePresence mode='wait'>
+          <Loader />
+        </AnimatePresence>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout isMobile={isMobile} />}>
+              <Route index element={<Home isMobile={isMobile} />}></Route>
+              <Route path="/bio" element={<Bio />}></Route>
+              <Route path="/interests" element={<Interests />}></Route>
+              <Route path="/projects" element={<Projects />}></Route>
+              <Route path="/contact" element={<ContactMe />}></Route>
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </LoaderContextProvider>
     </>
   );
 }

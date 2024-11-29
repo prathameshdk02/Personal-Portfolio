@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowUpRightFromSquare, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 import { fadeIn, fadeUp } from '../../../styles/motion/animations';
 
 const InfoCard = ({ text, hoverText, textIcon, hoverTextIcon, isMobile, navigateTo }) => {
-  const infoCardRef = useRef();
-  const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(isMobile ? true : false);
+  const navigate = useNavigate();
 
   const handleOnClick = () => {
     navigate(navigateTo);
@@ -24,23 +22,6 @@ const InfoCard = ({ text, hoverText, textIcon, hoverTextIcon, isMobile, navigate
     setIsHovered(false);
   };
 
-  useEffect(() => {
-    if (isMobile) {
-      return;
-    }
-    infoCardRef.current.addEventListener('mouseenter', handleMouseEnter);
-    infoCardRef.current.addEventListener('mouseleave', handleMouseLeave);
-
-    return () => {
-      try{
-        infoCardRef.current.removeEventListener('mouseenter', handleMouseEnter);
-        infoCardRef.current.removeEventListener('mouseleave', handleMouseLeave);
-      }catch(e){
-        console.info("InfoCard couldn't find the Event Listener to be removed.");
-      }
-    };
-  }, [isHovered]);
-
   return (
     <motion.article
       variants={fadeIn}
@@ -49,8 +30,9 @@ const InfoCard = ({ text, hoverText, textIcon, hoverTextIcon, isMobile, navigate
       transition={{ duration: 0.5 }}
       viewport={{ once: true, amount: 1 }}
       className="card flex flex-row-reverse gap-6 justify-between items-center text-base md:w-3/4"
-      ref={infoCardRef}
-      onClick={handleOnClick}>
+      onClick={handleOnClick}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}>
       <motion.div className="flex-1 font-semibold h-6 overflow-hidden space-y-16">
         <AnimatePresence mode="wait">
           {!isHovered && (
@@ -79,7 +61,7 @@ const InfoCard = ({ text, hoverText, textIcon, hoverTextIcon, isMobile, navigate
           )}
         </AnimatePresence>
       </motion.div>
-      <motion.div className='size-6'>
+      <motion.div className="size-6">
         <AnimatePresence mode="wait">
           {!isHovered && (
             <motion.div
@@ -94,8 +76,8 @@ const InfoCard = ({ text, hoverText, textIcon, hoverTextIcon, isMobile, navigate
           {isHovered && (
             <motion.div
               key="redirectIcon"
-              initial={{ scale: 0.5 }}
-              animate={{ scale: 1 }}
+              initial={{ scale: 0.5, opacity: 0}}
+              animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0, opacity: 0, transition: { duration: 0.1 } }}
               transition={{ type: 'spring', damping: 10, stiffness: 100 }}>
               <FontAwesomeIcon className="size-6 !mt-0" icon={hoverTextIcon}></FontAwesomeIcon>

@@ -3,8 +3,7 @@
 export const cardWhileHover = {
   scale: 1.02,
   transition: {
-    duration: 0.3,
-    delay: 0,
+    duration: 0.5,
   },
 };
 

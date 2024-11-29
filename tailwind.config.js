@@ -7,13 +7,14 @@ export default {
   theme: {
     extend: {
       colors:{
-        primarybg: 'rgba(var(--primarybg))',
         primaryhead: 'rgba(var(--primaryhead))',
         secondaryhead: 'rgba(var(--secondaryhead))',
-        glassyedge: 'rgba(var(--glassy-edge),0.125)',
-        cardbghover: 'rgba(var(--cardbghover))',
         primarytext: 'rgba(var(--primarytext))',
-        secondarytext: 'rgba(var(--secondarytext))'
+        secondarytext: 'rgba(var(--secondarytext))',
+        primarybg: 'rgba(var(--primarybg))',
+        cardbg: 'rgba(var(--cardbg))',
+        cardbghover: 'rgba(var(--cardbghover))',
+        glassyedge: 'rgba(var(--glassy-edge),0.125)',
       },
     },
   },
