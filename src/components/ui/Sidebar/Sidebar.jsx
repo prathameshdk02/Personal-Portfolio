@@ -6,7 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons/faBarsStaggered';
 import { faLeftLong, faHouse, faScrewdriverWrench, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { faUser, faLightbulb, faAddressCard } from '@fortawesome/free-regular-svg-icons';
-import { span } from 'framer-motion/client';
+
+import { animationDelay } from '../../../config/config';
 
 const HOME_URL = '/';
 const BIO_URL = '/bio';
@@ -20,8 +21,7 @@ const parentNavVariants = {
     opacity: 1,
     transition: {
       staggerChildren: 0.15,
-      delayChildren: 1.5,
-      delay: 1,
+      delayChildren: animationDelay + 1,
     },
   },
 };
@@ -51,10 +51,16 @@ const Sidebar = ({ isMobile }) => {
     <nav className="absolute right-8 top-8 md:right-10 md:top-10 text-white">
       {isMobile && !isOpen && (
         <motion.span
-          className="inline-block" 
+          className="inline-block"
           initial={{ opacity: 0, scale: 0.5 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.5, type: 'spring', stiffness: 100, damping: 7 }}>
+          transition={{
+            duration: 1,
+            delay: animationDelay + 1.5,
+            type: 'spring',
+            stiffness: 100,
+            damping: 7,
+          }}>
           <FontAwesomeIcon icon={faBarsStaggered} className="size-5" onClick={toggleMobileSidebar} />
         </motion.span>
       )}

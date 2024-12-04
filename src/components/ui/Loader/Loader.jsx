@@ -31,8 +31,7 @@ const Loader = () => {
   const { loaderState, setLoaderState } = useContext(LoaderContext);
   const isVisible = loaderState.isVisible || false;
   let largerDimension = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
-
-  largerDimension *= 1.5;
+  largerDimension += largerDimension * 0.25;
 
   if (!isVisible) {
     return <></>;

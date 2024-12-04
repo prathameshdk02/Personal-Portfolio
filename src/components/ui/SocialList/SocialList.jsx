@@ -4,13 +4,15 @@ import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-icons';
 
+import { animationDelay } from '../../../config/config';
+
 const wrapperVariants = {
   hidden: { opacity: 0 },
   show: {
     opacity: 1,
     transition: {
       staggerChildren: 0.15,
-      delayChildren: 2,
+      delayChildren: animationDelay + 1,
     },
   },
 };
