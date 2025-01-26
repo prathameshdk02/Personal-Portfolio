@@ -59,8 +59,8 @@ const Home = ({ isMobile }) => {
     <>
       <section
         onDoubleClick={handleDTSectionChange}
-        className="home-1 min-h-svh pt-20 sm:pt-0 text-slate-100 flex flex-col items-center justify-center">
-        <article className="w-full flex flex-col items-center gap-20 sm:gap-8 sm:flex-row pt-8 sm:pt-0">
+        className="home-1 pt-20 sm:min-h-svh sm:pt-0 text-slate-100 flex flex-col items-center justify-center">
+        <article className="w-full flex flex-col items-center gap-20 sm:gap-4 sm:flex-row pt-8 sm:pt-0">
           <div className="space-y-1 self-center flex-1">
             <motion.h2
               initial={{ opacity: 0 }}
@@ -117,7 +117,7 @@ const Home = ({ isMobile }) => {
               transition={{ duration: 1.5, delay: animationDelay + 1.5 }}
               className="absolute w-[120%] h-[120%] left-1/2 top-1/2 border-8 border-l-transparent border-r-transparent border-primaryhead rounded-full"></motion.div>
             <img
-              className="w-full min-w-48 max-w-64 rounded-full inline-block sm:min-w-52 sm:max-w-52 lg:min-w-64 lg:size-64 lg:max-w-64"
+              className="w-full min-w-48 max-w-52 rounded-full inline-block xl:max-w-60"
               src="/images/hero.jpg"
               alt="Profile Photo"
             />
@@ -126,7 +126,7 @@ const Home = ({ isMobile }) => {
       </section>
 
       {/* Scroll down tip - Negative Margin here*/}
-      <div className="text-primarytext justify-end hidden sm:block sm:-mt-[15vh] text-center">
+      <div className="text-primarytext justify-end hidden sm:block sm:-mt-[12vh] text-center">
         <motion.div
           className="protip-mouse-body"
           variants={verticalBob}
