@@ -46,3 +46,32 @@ export const fadeUp = {
     opacity: 0,
   },
 };
+
+export const pulsate = {
+  animate: {
+    opacity: [1, 0, 1],
+  },
+  transition: {
+    duration: 1.5,
+    ease: 'easeInOut',
+    repeat: Infinity,
+  },
+};
+
+export const verticalBob = {
+  initial: {
+    opacity: 0,
+  },
+  animate: {
+    opacity: 1,
+    y: [0, -10, 0],
+  },
+  transition: {
+    opacity: { duration: 1 },
+    y: {
+      ease: 'easeInOut',
+      repeat: Infinity,
+      duration: 1.5,
+    },
+  },
+};

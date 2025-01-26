@@ -10,7 +10,7 @@ preloader.style.width = `${largerDimension}px`;
 preloader.style.height = `${largerDimension}px`;
 
 const img = document.createElement('img');
-img.setAttribute('src', '/images/loaderLogo.svg');
+img.setAttribute('src', '/svgs/loader.svg');
 
 preloader.appendChild(img);
 

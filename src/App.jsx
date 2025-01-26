@@ -17,7 +17,6 @@ import ContactMe from './pages/ContactMe';
 const MOBILE_BREAKPOINT = 768;
 
 function App() {
-  console.log(window.innerWidth);
   const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT);
 
   const handleResize = useDebounce(() => {

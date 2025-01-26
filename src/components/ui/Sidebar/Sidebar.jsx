@@ -49,6 +49,7 @@ const Sidebar = ({ isMobile }) => {
 
   return (
     <nav className="absolute right-8 top-8 md:right-10 md:top-10 text-white">
+      {/* Show Hamburger Icon Bars when the Sidebar is closed for Mobile users */}
       {isMobile && !isOpen && (
         <motion.span
           className="inline-block"
@@ -66,6 +67,7 @@ const Sidebar = ({ isMobile }) => {
       )}
 
       <AnimatePresence>
+        {/* Show the expanded sidebar for mobile users */}
         {isMobile && isOpen && (
           <motion.ul
             initial={{ opacity: 0 }}
