@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,12 +7,8 @@ import { faLeftLong, faHouse, faScrewdriverWrench, faXmark } from '@fortawesome/
 import { faUser, faLightbulb, faAddressCard } from '@fortawesome/free-regular-svg-icons';
 
 import { animationDelay } from '../../../config/config';
+import HomeContext from '../../../context/HomeContext';
 
-const HOME_URL = '/';
-const BIO_URL = '/bio';
-const INTERESTS_URL = '/interests';
-const PROJECTS_URL = '/projects';
-const CONTACTME_URL = '/contact';
 
 const parentNavVariants = {
   hidden: { opacity: 0 },
@@ -42,6 +37,9 @@ const childNavVariants = {
 
 const Sidebar = ({ isMobile }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { homeCtx, setHomeCtx } = useContext(HomeContext);
+  const { currentSection } = homeCtx;
 
   const toggleMobileSidebar = () => {
     setIsOpen((prev) => !prev);
@@ -86,126 +84,96 @@ const Sidebar = ({ isMobile }) => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}>
-              <NavLink
-                to={HOME_URL}
+              <a
                 onClick={() => {
                   setIsOpen(false);
+                  setHomeCtx({ currentSection: 1, doSmoothScroll: true });
                 }}
                 className="group flex items-center gap-3 py-[0.65rem]">
-                {({ isActive }) => {
-                  return (
-                    <>
-                      <FontAwesomeIcon className="size-5" icon={faHouse}></FontAwesomeIcon>
-                      <span className="min-w-20">Home</span>
-                      <FontAwesomeIcon
-                        className={`opacity-0 group-hover:opacity-100 ${
-                          isActive ? 'opacity-100' : ''
-                        } transition-opacity duration-300 size-5`}
-                        icon={faLeftLong}></FontAwesomeIcon>
-                    </>
-                  );
-                }}
-              </NavLink>
+                <FontAwesomeIcon className="size-5" icon={faHouse}></FontAwesomeIcon>
+                <span className="min-w-20">Home</span>
+                <FontAwesomeIcon
+                  className={`opacity-0 group-hover:opacity-100 ${
+                    currentSection == 1 ? 'opacity-100' : ''
+                  } transition-opacity duration-300 size-5`}
+                  icon={faLeftLong}></FontAwesomeIcon>
+              </a>
             </motion.li>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1, duration: 0.5 }}>
-              <NavLink
-                to={BIO_URL}
+              <a
                 onClick={() => {
                   setIsOpen(false);
+                  setHomeCtx({ currentSection: 2, doSmoothScroll: true });
                 }}
                 className="group flex items-center gap-3 py-[0.65rem]">
-                {({ isActive }) => {
-                  return (
-                    <>
-                      <FontAwesomeIcon className="size-5" icon={faUser}></FontAwesomeIcon>
-                      <span className="min-w-20">Bio</span>
-                      <FontAwesomeIcon
-                        className={`opacity-0 group-hover:opacity-100 ${
-                          isActive ? 'opacity-100' : ''
-                        } transition-opacity duration-300 size-5`}
-                        icon={faLeftLong}></FontAwesomeIcon>
-                    </>
-                  );
-                }}
-              </NavLink>
+                <FontAwesomeIcon className="size-5" icon={faUser}></FontAwesomeIcon>
+                <span className="min-w-20">About</span>
+                <FontAwesomeIcon
+                  className={`opacity-0 group-hover:opacity-100 ${
+                    currentSection == 2 ? 'opacity-100' : ''
+                  } transition-opacity duration-300 size-5`}
+                  icon={faLeftLong}></FontAwesomeIcon>
+              </a>
             </motion.li>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.25 }}>
-              <NavLink
-                to={INTERESTS_URL}
+              <a
                 onClick={() => {
                   setIsOpen(false);
+                  setHomeCtx({ currentSection: 3, doSmoothScroll: true });
                 }}
                 className="group flex items-center gap-3 py-[0.65rem]">
-                {({ isActive }) => {
-                  return (
-                    <>
-                      <FontAwesomeIcon className="size-5" icon={faLightbulb}></FontAwesomeIcon>
-                      <span className="min-w-20">Interests</span>
-                      <FontAwesomeIcon
-                        className={`opacity-0 group-hover:opacity-100 ${
-                          isActive ? 'opacity-100' : ''
-                        } transition-opacity duration-300 size-5`}
-                        icon={faLeftLong}></FontAwesomeIcon>
-                    </>
-                  );
-                }}
-              </NavLink>
+                <FontAwesomeIcon className="size-5" icon={faLightbulb}></FontAwesomeIcon>
+                <span className="min-w-20">Experience</span>
+                <FontAwesomeIcon
+                  className={`opacity-0 group-hover:opacity-100 ${
+                    currentSection == 3 ? 'opacity-100' : ''
+                  } transition-opacity duration-300 size-5`}
+                  icon={faLeftLong}></FontAwesomeIcon>
+              </a>
             </motion.li>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.25 }}>
-              <NavLink
-                to={PROJECTS_URL}
+              <a
                 onClick={() => {
                   setIsOpen(false);
+                  setHomeCtx({ currentSection: 4, doSmoothScroll: true });
                 }}
                 className="group flex items-center gap-3 py-[0.65rem]">
-                {({ isActive }) => {
-                  return (
-                    <>
-                      <FontAwesomeIcon className="size-5" icon={faScrewdriverWrench}></FontAwesomeIcon>
-                      <span className="min-w-20">Projects</span>
-                      <FontAwesomeIcon
-                        className={`opacity-0 group-hover:opacity-100 ${
-                          isActive ? 'opacity-100' : ''
-                        } transition-opacity duration-300 size-5`}
-                        icon={faLeftLong}></FontAwesomeIcon>
-                    </>
-                  );
-                }}
-              </NavLink>
+                <FontAwesomeIcon className="size-5" icon={faScrewdriverWrench}></FontAwesomeIcon>
+                <span className="min-w-20">Projects</span>
+                <FontAwesomeIcon
+                  className={`opacity-0 group-hover:opacity-100 ${
+                    currentSection == 4 ? 'opacity-100' : ''
+                  } transition-opacity duration-300 size-5`}
+                  icon={faLeftLong}></FontAwesomeIcon>
+              </a>
             </motion.li>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.25 }}>
-              <NavLink
-                to={CONTACTME_URL}
+              <a
                 onClick={() => {
                   setIsOpen(false);
+                  setHomeCtx({ currentSection: 4, doSmoothScroll: true });
                 }}
                 className="group flex items-center gap-3 py-[0.65rem]">
-                {({ isActive }) => {
-                  return (
-                    <>
-                      <FontAwesomeIcon className="size-5" icon={faAddressCard}></FontAwesomeIcon>
-                      <span className="min-w-20">Contact Me</span>
-                      <FontAwesomeIcon
-                        className={`opacity-0 group-hover:opacity-100 ${
-                          isActive ? 'opacity-100' : ''
-                        } transition-opacity duration-300 size-5`}
-                        icon={faLeftLong}></FontAwesomeIcon>
-                    </>
-                  );
-                }}
-              </NavLink>
+                <FontAwesomeIcon className="size-5" icon={faAddressCard}></FontAwesomeIcon>
+                <span className="min-w-20">Contact Me</span>
+                <FontAwesomeIcon
+                  className={`opacity-0 group-hover:opacity-100 ${
+                    currentSection == 4 ? 'opacity-100' : ''
+                  } transition-opacity duration-300 size-5`}
+                  icon={faLeftLong}></FontAwesomeIcon>
+              </a>
             </motion.li>
           </motion.ul>
         )}
@@ -219,79 +187,74 @@ const Sidebar = ({ isMobile }) => {
             animate="show"
             className="flex justify-evenly gap-2 p-3 px-4 min-w-72 rounded-3xl border border-glassyedge">
             <motion.li variants={childNavVariants}>
-              <NavLink
-                to={HOME_URL}
+              <a
                 onClick={() => {
-                  setIsOpen(false);
+                  setHomeCtx({ currentSection: 1, doSmoothScroll: true });
                 }}
-                className={({ isActive }) =>
-                  `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
-                }>
+                className={`group rounded-full hover:bg-glassyedge ${
+                  currentSection == 1 ? 'bg-glassyedge' : ''
+                } p-2 relative`}>
                 <FontAwesomeIcon icon={faHouse} className="size-5"></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   Home
                 </span>
-              </NavLink>
+              </a>
             </motion.li>
             <motion.li variants={childNavVariants}>
-              <NavLink
-                to={BIO_URL}
+              <a
                 onClick={() => {
-                  setIsOpen(false);
+                  setHomeCtx({ currentSection: 2, doSmoothScroll: true });
                 }}
-                className={({ isActive }) =>
-                  `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
-                }>
+                className={`group rounded-full hover:bg-glassyedge ${
+                  currentSection == 2 ? 'bg-glassyedge' : ''
+                } p-2 relative`}>
                 <FontAwesomeIcon icon={faUser} className="size-5"></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
-                  Bio
+                  About
                 </span>
-              </NavLink>
+              </a>
             </motion.li>
             <motion.li variants={childNavVariants}>
-              <NavLink
-                to={INTERESTS_URL}
+              <a
                 onClick={() => {
-                  setIsOpen(false);
+                  setHomeCtx({ currentSection: 3, doSmoothScroll: true });
                 }}
-                className={({ isActive }) =>
-                  `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
-                }>
+                className={`group rounded-full hover:bg-glassyedge ${
+                  currentSection == 3 ? 'bg-glassyedge' : ''
+                } p-2 relative`}>
                 <FontAwesomeIcon icon={faLightbulb} className="size-5"></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
-                  Interests
+                  Experience
                 </span>
-              </NavLink>
+              </a>
             </motion.li>
             <motion.li variants={childNavVariants}>
-              <NavLink
-                to={PROJECTS_URL}
+              <a
                 onClick={() => {
-                  setIsOpen(false);
+                  setHomeCtx({ currentSection: 4, doSmoothScroll: true });
                 }}
-                className={({ isActive }) =>
-                  `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
-                }>
+                className={`group rounded-full hover:bg-glassyedge ${
+                  currentSection == 4 ? 'bg-glassyedge' : ''
+                } p-2 relative`}>
                 <FontAwesomeIcon icon={faScrewdriverWrench} className="size-5"></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   Projects
                 </span>
-              </NavLink>
+              </a>
             </motion.li>
             <motion.li variants={childNavVariants}>
-              <NavLink
-                to={CONTACTME_URL}
+              <a
                 onClick={() => {
-                  setIsOpen(false);
+                  setHomeCtx({ currentSection: 4, doSmoothScroll: true });
                 }}
-                className={({ isActive }) =>
-                  `group rounded-full hover:bg-glassyedge ${isActive ? 'bg-glassyedge' : ''} p-2 relative`
-                }>
+                className={`group rounded-full hover:bg-glassyedge ${
+                  currentSection == 4 ? 'bg-glassyedge' : ''
+                } p-2 relative`}>
                 <FontAwesomeIcon icon={faAddressCard} className="size-5"></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   Contact
                 </span>
-              </NavLink>
+              </a>
             </motion.li>
           </motion.ul>
         </AnimatePresence>
