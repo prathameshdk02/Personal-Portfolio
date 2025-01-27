@@ -1,11 +1,8 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { AnimatePresence } from 'framer-motion';
-
-import Loader from './components/ui/Loader/Loader';
 
 import { useDebounce } from './hooks/useDebounce';
-import { LoaderContextProvider } from './context/LoaderContext';
+import { HomeContextProvider } from './context/HomeContext';
 
 import Layout from './components/ui/Layout/Layout';
 import Home from './pages/Home';
@@ -32,10 +29,7 @@ function App() {
 
   return (
     <>
-      <LoaderContextProvider>
-        <AnimatePresence mode='wait'>
-          <Loader />
-        </AnimatePresence>
+      <HomeContextProvider>
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Layout isMobile={isMobile} />}>
@@ -47,7 +41,7 @@ function App() {
             </Route>
           </Routes>
         </BrowserRouter>
-      </LoaderContextProvider>
+      </HomeContextProvider>
     </>
   );
 }

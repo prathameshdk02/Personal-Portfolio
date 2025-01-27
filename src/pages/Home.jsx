@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useContext } from 'react';
 import { motion } from 'framer-motion';
 import { ReactTyped } from 'react-typed';
 
@@ -9,6 +9,7 @@ import { faComment, faUser, faLightbulb } from '@fortawesome/free-regular-svg-ic
 import { useDebounce } from '../hooks/useDebounce';
 import { animationDelay } from '../config/config';
 import { fadeIn, pulsate, verticalBob } from '../styles/motion/animations';
+import HomeContext from '../context/HomeContext';
 
 import Card from '../components/ui/Card/Card';
 import InfoPill from '../components/ui/InfoPill/InfoPill';
@@ -17,14 +18,15 @@ import Timeline, { TimeElement } from '../components/ui/Timeline/Timeline';
 let SECTION_COUNT = 0;
 
 const Home = ({ isMobile }) => {
-  const [currentSection, setCurrentSection] = useState(1);
+  const { homeCtx, setHomeCtx } = useContext(HomeContext);
+  const { currentSection, doSmoothScroll } = homeCtx;
 
   const handleDTSectionChange = useDebounce(() => {
-    setCurrentSection((currentSection) => {
-      if (currentSection < SECTION_COUNT) {
-        return currentSection + 1;
+    setHomeCtx((prevHomeCtx) => {
+      if (prevHomeCtx.currentSection < SECTION_COUNT) {
+        return { currentSection: prevHomeCtx.currentSection + 1, doSmoothScroll: true };
       }
-      return 1;
+      return { currentSection: 1, doSmoothScroll: true };
     });
   });
 
@@ -35,6 +37,10 @@ const Home = ({ isMobile }) => {
 
   // Scrolls to the currentSection smoothly
   useEffect(() => {
+    if (!doSmoothScroll) {
+      return;
+    }
+
     if (currentSection == 1) {
       window.scrollTo({
         top: 0,
