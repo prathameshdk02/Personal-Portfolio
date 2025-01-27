@@ -1,26 +1,11 @@
 // Animations for Framer Motion Elements
 
-export const cardWhileHover = {
-  scale: 1.02,
-  transition: {
-    duration: 0.5,
-  },
-};
 
-export const staggeringParent = {
-  initial: {},
-  animate: {
-    transition: {
-      staggerChildren: 0.3,
-      delayChildren: 0.8,
-    },
-  },
-};
-
+// FadeIn Animations
 export const fadeIn = {
   initial: {
     opacity: 0,
-    y: -20,
+    y: -24,
   },
   animate: {
     opacity: 1,
@@ -28,7 +13,7 @@ export const fadeIn = {
   },
   exit: {
     opacity: 0,
-    y: 20,
+    y: 24,
   },
 };
 
