@@ -1,6 +1,5 @@
 // Animations for Framer Motion Elements
 
-
 // FadeIn Animations
 export const fadeIn = {
   initial: {
@@ -58,5 +57,25 @@ export const verticalBob = {
       repeat: Infinity,
       duration: 1.5,
     },
+  },
+};
+
+export const popupSpring = {
+  initial: {
+    opacity: 0,
+    scale: 0.7,
+  },
+  animate: {
+    opacity: 1,
+    scale: 1,
+  },
+  exit: {
+    opacity: 0,
+    scale: 0.5
+  },
+  transition: {
+    type: 'spring',
+    stiffness: 50,
+    damping: 10,
   },
 };

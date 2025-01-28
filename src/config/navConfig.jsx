@@ -1,5 +1,3 @@
-export const animationDelay = 1.5;
-
 export const HOME_SECTION_NAME = 'Home';
 export const ABOUT_SECTION_NAME = 'About';
 export const EXP_SECTION_NAME = 'Experience';

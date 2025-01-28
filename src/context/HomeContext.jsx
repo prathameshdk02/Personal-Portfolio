@@ -3,6 +3,7 @@ import { useState, createContext } from 'react';
 const INITIAL_STATE = {
   currentSection: 1,
   doSmoothScroll: false,
+  mainSectionWidth: 0,
 };
 
 const HomeContext = createContext(INITIAL_STATE);

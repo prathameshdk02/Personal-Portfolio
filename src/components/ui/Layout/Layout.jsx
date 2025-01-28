@@ -1,15 +1,27 @@
-import React from 'react';
-import { Outlet } from 'react-router-dom';
+import React, { useContext, useEffect, useRef } from 'react';
 
 import Sidebar from '../Sidebar/Sidebar';
 import SocialList from '../SocialList/SocialList';
+import HomeContext from '../../../context/HomeContext';
 
-const Layout = ({ isMobile }) => {
+const Layout = ({ isMobile, children }) => {
+  const { setHomeCtx } = useContext(HomeContext);
+  const mainRef = useRef();
+
+  useEffect(() => {
+    setHomeCtx((prevHomeCtx) => {
+      return { ...prevHomeCtx, mainSectionWidth: mainRef.current.getBoundingClientRect().width };
+    });
+  }, []);
+
   return (
-    <main id="main-glassy" className="overflow-x-hidden glassy-filter max-w-[1224px] lg:w-[85%] md:border md:border-glassyedge mb-4 md:mx-4 px-7 sm:px-12 lg:px-16 bg-primarybg relative">
-      <SocialList className="absolute left-8 top-8 sm:left-12 sm:top-9 md:top-12 lg:left-16 lg:top-14"/>
+    <main
+      ref={mainRef}
+      id="main-glassy"
+      className="overflow-x-hidden glassy-filter max-w-[1200px] md:border-2 md:border-y-0 md:border-glassyedge px-7 pb-8 sm:px-12 md:mx-4 lg:px-16 bg-primarybg relative">
+      <SocialList className="absolute left-8 top-8 sm:left-12 sm:top-9 md:top-12 lg:left-16 lg:top-13" />
       <Sidebar isMobile={isMobile} />
-      <Outlet />
+      {children}
     </main>
   );
 };

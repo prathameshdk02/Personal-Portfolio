@@ -1,8 +1,9 @@
-.dark{
+.dark {
   --primarybg: 15, 15, 15;
   --primaryhead: 220, 220, 220;
   --secondaryhead: 100, 100, 100;
   --glassy-edge: 255, 255, 255;
+  --opaque-glass: 25, 25, 25;
   --cardbg: 15, 15, 15;
   --cardbghover: 28, 26, 25;
   --primarytext: 220, 220, 220;

@@ -6,10 +6,7 @@ import { HomeContextProvider } from './context/HomeContext';
 
 import Layout from './components/ui/Layout/Layout';
 import Home from './pages/Home';
-import Bio from './pages/Bio';
-import Interests from './pages/Interests';
-import Projects from './pages/Projects';
-import ContactMe from './pages/ContactMe';
+import BubbleSidebar from './components/ui/BubbleSidebar/BubbleSidebar';
 
 const MOBILE_BREAKPOINT = 768;
 
@@ -30,17 +27,10 @@ function App() {
   return (
     <>
       <HomeContextProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Layout isMobile={isMobile} />}>
-              <Route index element={<Home isMobile={isMobile} />}></Route>
-              <Route path="/bio" element={<Bio />}></Route>
-              <Route path="/interests" element={<Interests />}></Route>
-              <Route path="/projects" element={<Projects />}></Route>
-              <Route path="/contact" element={<ContactMe />}></Route>
-            </Route>
-          </Routes>
-        </BrowserRouter>
+        <Layout isMobile={isMobile}>
+          <Home />
+        </Layout>
+        <BubbleSidebar />
       </HomeContextProvider>
     </>
   );

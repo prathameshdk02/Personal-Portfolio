@@ -24,15 +24,48 @@ const Home = ({ isMobile }) => {
   const handleDTSectionChange = useDebounce(() => {
     setHomeCtx((prevHomeCtx) => {
       if (prevHomeCtx.currentSection < SECTION_COUNT) {
-        return { currentSection: prevHomeCtx.currentSection + 1, doSmoothScroll: true };
+        return { ...prevHomeCtx, currentSection: prevHomeCtx.currentSection + 1, doSmoothScroll: true };
       }
-      return { currentSection: 1, doSmoothScroll: true };
+      return { ...prevHomeCtx, currentSection: 1, doSmoothScroll: true };
     });
   });
 
+  const setCurrentDebounced = useDebounce((id) => {
+    setHomeCtx((prevHomeCtx) => {
+      return { ...prevHomeCtx, currentSection: id, doSmoothScroll: false };
+    });
+  }, 400);
+
   // Updates the number of sections when components mounts
   useEffect(() => {
-    SECTION_COUNT = document.querySelectorAll('section[class*="home-"]').length;
+    const intersectionObs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const idString = entry.target.id;
+            let id = parseInt(idString.split('-')[2]);
+            setCurrentDebounced(id);
+          }
+        });
+      },
+      {
+        root: null,
+        threshold: 0.4,
+      }
+    );
+
+    const sections = document.querySelectorAll('section[class*="home-"]');
+    SECTION_COUNT = sections.length;
+
+    // console.log(sections);
+
+    sections.forEach((section) => {
+      intersectionObs.observe(section);
+    });
+
+    return () => {
+      sections.forEach((section) => intersectionObs.unobserve(section));
+    };
   }, []);
 
   // Scrolls to the currentSection smoothly
@@ -67,6 +100,7 @@ const Home = ({ isMobile }) => {
       <>
         <section
           onDoubleClick={handleDTSectionChange}
+          id="home-section-1"
           className="home-1 pt-20 sm:min-h-svh sm:pt-0 text-slate-100 flex flex-col items-center justify-center">
           <article className="w-full flex flex-col items-center gap-20 sm:gap-4 sm:flex-row pt-8 sm:pt-0">
             <div className="space-y-1 self-center flex-1">
@@ -154,6 +188,7 @@ const Home = ({ isMobile }) => {
 
         <section
           onDoubleClick={handleDTSectionChange}
+          id="home-section-2"
           className="home-2 pt-12 mt-14 sm:mt-0 text-slate-100 space-y-10">
           <motion.h2
             variants={fadeIn}
@@ -223,6 +258,7 @@ const Home = ({ isMobile }) => {
         </section>
         <section
           onDoubleClick={handleDTSectionChange}
+          id="home-section-3"
           className="home-3 flex flex-col gap-10 pt-12 text-slate-100">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
@@ -280,6 +316,7 @@ const Home = ({ isMobile }) => {
         {/* Projects Section */}
         <section
           onDoubleClick={handleDTSectionChange}
+          id="home-section-4"
           className="home-4 min-h-svh flex flex-col gap-10 pt-12 text-slate-100">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}

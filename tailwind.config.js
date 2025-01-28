@@ -15,6 +15,7 @@ export default {
         cardbg: 'rgba(var(--cardbg))',
         cardbghover: 'rgba(var(--cardbghover))',
         glassyedge: 'rgba(var(--glassy-edge),0.125)',
+        opaqueglass:'rgba(var(--opaque-glass))',
       },
     },
   },
