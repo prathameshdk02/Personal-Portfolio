@@ -37,7 +37,7 @@ export const pulsate = {
   },
   transition: {
     duration: 1.5,
-    ease: 'easeInOut',
+    ease: "easeInOut",
     repeat: Infinity,
   },
 };
@@ -53,7 +53,7 @@ export const verticalBob = {
   transition: {
     opacity: { duration: 1 },
     y: {
-      ease: 'easeInOut',
+      ease: "easeInOut",
       repeat: Infinity,
       duration: 1.5,
     },
@@ -71,10 +71,10 @@ export const popupSpring = {
   },
   exit: {
     opacity: 0,
-    scale: 0.5
+    scale: 0.5,
   },
   transition: {
-    type: 'spring',
+    type: "spring",
     stiffness: 50,
     damping: 10,
   },

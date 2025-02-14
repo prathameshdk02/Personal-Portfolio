@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext } from "react";
 
-import LoaderContext from '../context/LoaderContext';
+import LoaderContext from "../context/LoaderContext";
 
 const Bio = () => {
   const { loaderState, setLoaderState } = useContext(LoaderContext);

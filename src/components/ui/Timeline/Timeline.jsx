@@ -1,15 +1,21 @@
-import React from 'react';
-import { AnimatePresence, disableInstantTransitions, motion } from 'framer-motion';
+import React from "react";
+import {
+  AnimatePresence,
+  disableInstantTransitions,
+  motion,
+} from "framer-motion";
 
-import { fadeIn } from '../../../styles/motion/animations';
+import { fadeIn } from "../../../styles/motion/animations";
 
-import Card, { MotionCard } from '../Card/Card';
+import Card, { MotionCard } from "../Card/Card";
 
-export const TimeToggle = ({children}) => {
-  return <AnimatePresence>
-    <div className="hidden sm:block">{children}</div>
-  </AnimatePresence>;
-}
+export const TimeToggle = ({ children }) => {
+  return (
+    <AnimatePresence>
+      <div className="hidden sm:block">{children}</div>
+    </AnimatePresence>
+  );
+};
 
 export const TimeElement = ({ children }) => {
   return (
@@ -20,7 +26,8 @@ export const TimeElement = ({ children }) => {
         initial="initial"
         whileInView="animate"
         transition={{ duration: 0.7, delay: 0.8 }}
-        viewport={{ once: true, amount: 0.5 }}>
+        viewport={{ once: true, amount: 0.5 }}
+      >
         {children}
       </MotionCard>
     </>
@@ -35,10 +42,12 @@ const Timeline = ({ children }) => {
       initial="initial"
       whileInView="animate"
       viewport={{ once: true }}
-      transition={{ delay: 1 }}>
+      transition={{ delay: 1 }}
+    >
       {children}
       <motion.div
-        className={`absolute hidden sm:block top-0 left-3 h-full bg-glassyedge w-1 rounded-full !mt-0`}></motion.div>
+        className={`absolute hidden sm:block top-0 left-3 h-full bg-glassyedge w-1 rounded-full !mt-0`}
+      ></motion.div>
     </motion.section>
   );
 };

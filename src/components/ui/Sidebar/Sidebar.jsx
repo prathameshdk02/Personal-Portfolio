@@ -1,16 +1,25 @@
-import React, { useState, useContext } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useContext } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBarsStaggered } from '@fortawesome/free-solid-svg-icons/faBarsStaggered';
-import { faLeftLong, faHouse, faScrewdriverWrench, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { faUser, faLightbulb, faAddressCard } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBarsStaggered } from "@fortawesome/free-solid-svg-icons/faBarsStaggered";
+import {
+  faLeftLong,
+  faHouse,
+  faScrewdriverWrench,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
+import {
+  faUser,
+  faLightbulb,
+  faAddressCard,
+} from "@fortawesome/free-regular-svg-icons";
 
-import { animationDelay } from '../../../config/config';
-import * as NAV from '../../../config/navConfig';
-import { popupSpring } from '../../../styles/motion/animations';
+import { animationDelay } from "../../../config/config";
+import * as NAV from "../../../config/navConfig";
+import { popupSpring } from "../../../styles/motion/animations";
 
-import HomeContext from '../../../context/HomeContext';
+import HomeContext from "../../../context/HomeContext";
 
 const parentNavVariants = {
   hidden: { opacity: 0 },
@@ -30,7 +39,7 @@ const childNavVariants = {
     scale: 1,
     transition: {
       duration: 0.4,
-      type: 'spring',
+      type: "spring",
       stiffness: 100,
       damping: 7,
     },
@@ -60,8 +69,13 @@ const Sidebar = ({ isMobile }) => {
             ...popupSpring.transition,
             duration: 1,
             delay: 1.5,
-          }}>
-          <FontAwesomeIcon icon={faBarsStaggered} className="size-5" onClick={toggleMobileSidebar} />
+          }}
+        >
+          <FontAwesomeIcon
+            icon={faBarsStaggered}
+            className="size-5"
+            onClick={toggleMobileSidebar}
+          />
         </motion.span>
       )}
 
@@ -73,117 +87,180 @@ const Sidebar = ({ isMobile }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="glassy-slide-down fixed w-full h-full top-0 left-1/2 rounded-b-lg transform -translate-x-1/2 p-6 z-10">
+            className="glassy-slide-down fixed w-full h-full top-0 left-1/2 rounded-b-lg transform -translate-x-1/2 p-6 z-10"
+          >
             <FontAwesomeIcon
               icon={faXmark}
               className="size-5 absolute right-6 top-6"
               onClick={toggleMobileSidebar}
             />
-            <motion.h2 className="text-3xl text-primaryhead font-bold">Navigation</motion.h2>
-            <motion.h2 className="text-2xl text-secondaryhead mb-4">Go To</motion.h2>
+            <motion.h2 className="text-3xl text-primaryhead font-bold">
+              Navigation
+            </motion.h2>
+            <motion.h2 className="text-2xl text-secondaryhead mb-4">
+              Go To
+            </motion.h2>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}>
+              transition={{ delay: 0.1, duration: 0.5 }}
+            >
               <a
                 onClick={() => {
                   setIsOpen(false);
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.HOME_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.HOME_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
-                className="group flex items-center gap-3 py-[0.65rem]">
-                <FontAwesomeIcon className="size-5" icon={faHouse}></FontAwesomeIcon>
+                className="group flex items-center gap-3 py-[0.65rem]"
+              >
+                <FontAwesomeIcon
+                  className="size-5"
+                  icon={faHouse}
+                ></FontAwesomeIcon>
                 <span className="min-w-20">{NAV.HOME_SECTION_NAME}</span>
                 <FontAwesomeIcon
                   className={`opacity-0 group-hover:opacity-100 ${
-                    currentSection == NAV.HOME_SECTION_INDEX ? 'opacity-100' : ''
+                    currentSection == NAV.HOME_SECTION_INDEX
+                      ? "opacity-100"
+                      : ""
                   } transition-opacity duration-300 size-5`}
-                  icon={faLeftLong}></FontAwesomeIcon>
+                  icon={faLeftLong}
+                ></FontAwesomeIcon>
               </a>
             </motion.li>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1, duration: 0.5 }}>
+              transition={{ delay: 0.1, duration: 0.5 }}
+            >
               <a
                 onClick={() => {
                   setIsOpen(false);
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.ABOUT_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.ABOUT_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
-                className="group flex items-center gap-3 py-[0.65rem]">
-                <FontAwesomeIcon className="size-5" icon={faUser}></FontAwesomeIcon>
+                className="group flex items-center gap-3 py-[0.65rem]"
+              >
+                <FontAwesomeIcon
+                  className="size-5"
+                  icon={faUser}
+                ></FontAwesomeIcon>
                 <span className="min-w-20">{NAV.ABOUT_SECTION_NAME}</span>
                 <FontAwesomeIcon
                   className={`opacity-0 group-hover:opacity-100 ${
-                    currentSection == NAV.ABOUT_SECTION_INDEX ? 'opacity-100' : ''
+                    currentSection == NAV.ABOUT_SECTION_INDEX
+                      ? "opacity-100"
+                      : ""
                   } transition-opacity duration-300 size-5`}
-                  icon={faLeftLong}></FontAwesomeIcon>
+                  icon={faLeftLong}
+                ></FontAwesomeIcon>
               </a>
             </motion.li>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2, duration: 0.25 }}>
+              transition={{ delay: 0.2, duration: 0.25 }}
+            >
               <a
                 onClick={() => {
                   setIsOpen(false);
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.EXP_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.EXP_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
-                className="group flex items-center gap-3 py-[0.65rem]">
-                <FontAwesomeIcon className="size-5" icon={faLightbulb}></FontAwesomeIcon>
+                className="group flex items-center gap-3 py-[0.65rem]"
+              >
+                <FontAwesomeIcon
+                  className="size-5"
+                  icon={faLightbulb}
+                ></FontAwesomeIcon>
                 <span className="min-w-20">{NAV.EXP_SECTION_NAME}</span>
                 <FontAwesomeIcon
                   className={`opacity-0 group-hover:opacity-100 ${
-                    currentSection == NAV.EXP_SECTION_INDEX ? 'opacity-100' : ''
+                    currentSection == NAV.EXP_SECTION_INDEX ? "opacity-100" : ""
                   } transition-opacity duration-300 size-5`}
-                  icon={faLeftLong}></FontAwesomeIcon>
+                  icon={faLeftLong}
+                ></FontAwesomeIcon>
               </a>
             </motion.li>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3, duration: 0.25 }}>
+              transition={{ delay: 0.3, duration: 0.25 }}
+            >
               <a
                 onClick={() => {
                   setIsOpen(false);
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.PROJECT_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.PROJECT_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
-                className="group flex items-center gap-3 py-[0.65rem]">
-                <FontAwesomeIcon className="size-5" icon={faScrewdriverWrench}></FontAwesomeIcon>
+                className="group flex items-center gap-3 py-[0.65rem]"
+              >
+                <FontAwesomeIcon
+                  className="size-5"
+                  icon={faScrewdriverWrench}
+                ></FontAwesomeIcon>
                 <span className="min-w-20">{NAV.PROJECT_SECTION_NAME}</span>
                 <FontAwesomeIcon
                   className={`opacity-0 group-hover:opacity-100 ${
-                    currentSection == NAV.PROJECT_SECTION_INDEX ? 'opacity-100' : ''
+                    currentSection == NAV.PROJECT_SECTION_INDEX
+                      ? "opacity-100"
+                      : ""
                   } transition-opacity duration-300 size-5`}
-                  icon={faLeftLong}></FontAwesomeIcon>
+                  icon={faLeftLong}
+                ></FontAwesomeIcon>
               </a>
             </motion.li>
             <motion.li
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.25 }}>
+              transition={{ delay: 0.4, duration: 0.25 }}
+            >
               <a
                 onClick={() => {
                   setIsOpen(false);
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.SKILL_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.SKILL_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
-                className="group flex items-center gap-3 py-[0.65rem]">
-                <FontAwesomeIcon className="size-5" icon={faAddressCard}></FontAwesomeIcon>
+                className="group flex items-center gap-3 py-[0.65rem]"
+              >
+                <FontAwesomeIcon
+                  className="size-5"
+                  icon={faAddressCard}
+                ></FontAwesomeIcon>
                 <span className="min-w-20">{NAV.SKILL_SECTION_NAME} Me</span>
                 <FontAwesomeIcon
                   className={`opacity-0 group-hover:opacity-100 ${
-                    currentSection == NAV.SKILL_SECTION_INDEX ? 'opacity-100' : ''
+                    currentSection == NAV.SKILL_SECTION_INDEX
+                      ? "opacity-100"
+                      : ""
                   } transition-opacity duration-300 size-5`}
-                  icon={faLeftLong}></FontAwesomeIcon>
+                  icon={faLeftLong}
+                ></FontAwesomeIcon>
               </a>
             </motion.li>
           </motion.ul>
@@ -196,18 +273,29 @@ const Sidebar = ({ isMobile }) => {
             variants={parentNavVariants}
             initial="hidden"
             animate="show"
-            className="flex justify-evenly gap-2 p-3 px-4 min-w-72 rounded-3xl border border-glassyedge">
+            className="flex justify-evenly gap-2 p-3 px-4 min-w-72 rounded-3xl border border-glassyedge"
+          >
             <motion.li variants={childNavVariants}>
               <a
                 onClick={() => {
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.HOME_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.HOME_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
                 className={`group rounded-full hover:bg-glassyedge ${
-                  currentSection == NAV.HOME_SECTION_INDEX ? 'bg-glassyedge' : ''
-                } p-2 relative`}>
-                <FontAwesomeIcon icon={faHouse} className="size-5"></FontAwesomeIcon>
+                  currentSection == NAV.HOME_SECTION_INDEX
+                    ? "bg-glassyedge"
+                    : ""
+                } p-2 relative`}
+              >
+                <FontAwesomeIcon
+                  icon={faHouse}
+                  className="size-5"
+                ></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   {NAV.HOME_SECTION_NAME}
                 </span>
@@ -217,13 +305,23 @@ const Sidebar = ({ isMobile }) => {
               <a
                 onClick={() => {
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.ABOUT_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.ABOUT_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
                 className={`group rounded-full hover:bg-glassyedge ${
-                  currentSection == NAV.ABOUT_SECTION_INDEX ? 'bg-glassyedge' : ''
-                } p-2 relative`}>
-                <FontAwesomeIcon icon={faUser} className="size-5"></FontAwesomeIcon>
+                  currentSection == NAV.ABOUT_SECTION_INDEX
+                    ? "bg-glassyedge"
+                    : ""
+                } p-2 relative`}
+              >
+                <FontAwesomeIcon
+                  icon={faUser}
+                  className="size-5"
+                ></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   {NAV.ABOUT_SECTION_NAME}
                 </span>
@@ -233,13 +331,21 @@ const Sidebar = ({ isMobile }) => {
               <a
                 onClick={() => {
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.EXP_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.EXP_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
                 className={`group rounded-full hover:bg-glassyedge ${
-                  currentSection == NAV.EXP_SECTION_INDEX ? 'bg-glassyedge' : ''
-                } p-2 relative`}>
-                <FontAwesomeIcon icon={faLightbulb} className="size-5"></FontAwesomeIcon>
+                  currentSection == NAV.EXP_SECTION_INDEX ? "bg-glassyedge" : ""
+                } p-2 relative`}
+              >
+                <FontAwesomeIcon
+                  icon={faLightbulb}
+                  className="size-5"
+                ></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   {NAV.EXP_SECTION_NAME}
                 </span>
@@ -249,13 +355,23 @@ const Sidebar = ({ isMobile }) => {
               <a
                 onClick={() => {
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.PROJECT_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.PROJECT_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
                 className={`group rounded-full hover:bg-glassyedge ${
-                  currentSection == NAV.PROJECT_SECTION_INDEX ? 'bg-glassyedge' : ''
-                } p-2 relative`}>
-                <FontAwesomeIcon icon={faScrewdriverWrench} className="size-5"></FontAwesomeIcon>
+                  currentSection == NAV.PROJECT_SECTION_INDEX
+                    ? "bg-glassyedge"
+                    : ""
+                } p-2 relative`}
+              >
+                <FontAwesomeIcon
+                  icon={faScrewdriverWrench}
+                  className="size-5"
+                ></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   {NAV.PROJECT_SECTION_NAME}
                 </span>
@@ -265,13 +381,23 @@ const Sidebar = ({ isMobile }) => {
               <a
                 onClick={() => {
                   setHomeCtx((prevHomeCtx) => {
-                    return { ...prevHomeCtx, currentSection: NAV.SKILL_SECTION_INDEX, doSmoothScroll: true };
+                    return {
+                      ...prevHomeCtx,
+                      currentSection: NAV.SKILL_SECTION_INDEX,
+                      doSmoothScroll: true,
+                    };
                   });
                 }}
                 className={`group rounded-full hover:bg-glassyedge ${
-                  currentSection == NAV.SKILL_SECTION_INDEX ? 'bg-glassyedge' : ''
-                } p-2 relative`}>
-                <FontAwesomeIcon icon={faAddressCard} className="size-5"></FontAwesomeIcon>
+                  currentSection == NAV.SKILL_SECTION_INDEX
+                    ? "bg-glassyedge"
+                    : ""
+                } p-2 relative`}
+              >
+                <FontAwesomeIcon
+                  icon={faAddressCard}
+                  className="size-5"
+                ></FontAwesomeIcon>
                 <span className="absolute -bottom-9 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 pointer-events-none transition-all duration-400 font-medium">
                   {NAV.SKILL_SECTION_NAME}
                 </span>

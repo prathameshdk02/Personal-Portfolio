@@ -1,11 +1,17 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import { motion, animate, useAnimation, useMotionValue, useMotionValueEvent } from 'framer-motion';
+import React, { useState, useContext, useEffect } from "react";
+import { createPortal } from "react-dom";
+import {
+  motion,
+  animate,
+  useAnimation,
+  useMotionValue,
+  useMotionValueEvent,
+} from "framer-motion";
 
-import LoaderContext from '../../../context/LoaderContext';
+import LoaderContext from "../../../context/LoaderContext";
 
 const spreadVariants = {
-  initial: { scale: 0, opacity: 0, x: '-50%', y: '-50%' },
+  initial: { scale: 0, opacity: 0, x: "-50%", y: "-50%" },
   visible: { scale: 1, opacity: 1 },
 };
 
@@ -14,23 +20,37 @@ const logoVariants = {
   visible: {
     scale: 1,
     opacity: 1,
-    transition: { duration: 0.4, type: 'spring', damping: 10, stiffness: 100, delay: 0.2 },
+    transition: {
+      duration: 0.4,
+      type: "spring",
+      damping: 10,
+      stiffness: 100,
+      delay: 0.2,
+    },
   },
   rotate: {
     rotate: 360,
     transition: {
       duration: 0.7,
       ease: "easeInOut",
-      repeat: Infinity
-    }
+      repeat: Infinity,
+    },
   },
-  hidden: { scale: 0.6, rotate: 360, opacity: 0, transition: { duration: 0.4 } },
+  hidden: {
+    scale: 0.6,
+    rotate: 360,
+    opacity: 0,
+    transition: { duration: 0.4 },
+  },
 };
 
 const Loader = () => {
   const { loaderState, setLoaderState } = useContext(LoaderContext);
   const isVisible = loaderState.isVisible || false;
-  let largerDimension = window.innerWidth > window.innerHeight ? window.innerWidth : window.innerHeight;
+  let largerDimension =
+    window.innerWidth > window.innerHeight
+      ? window.innerWidth
+      : window.innerHeight;
   largerDimension += largerDimension * 0.25;
 
   if (!isVisible) {
@@ -45,20 +65,20 @@ const Loader = () => {
   const targetSize = largerDimension;
 
   const startReveal = async () => {
-    await logoControls.start('hidden');
+    await logoControls.start("hidden");
     await animate(gradientSize, targetSize, { duration: 1.8 });
     setLoaderState({ ...loaderState, isVisible: false });
   };
 
-  useMotionValueEvent(gradientSize, 'change', () => {
+  useMotionValueEvent(gradientSize, "change", () => {
     setGradientState(gradientSize.get());
   });
 
   useEffect(() => {
     const startAnimations = async () => {
-      spreadControls.start('visible');
-      await logoControls.start('visible');
-      logoControls.start('rotate');
+      spreadControls.start("visible");
+      await logoControls.start("visible");
+      logoControls.start("rotate");
       setTimeout(() => {
         startReveal();
       }, 1000);
@@ -80,7 +100,8 @@ const Loader = () => {
         background: `radial-gradient(circle at center, transparent ${gradientState}px, #000000 ${
           gradientState + 1
         }px)`,
-      }}>
+      }}
+    >
       <motion.svg
         variants={logoVariants}
         initial="initial"
@@ -89,7 +110,8 @@ const Loader = () => {
         id="Layer_2"
         data-name="Layer 2"
         xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 275.98 353.99">
+        viewBox="0 0 275.98 353.99"
+      >
         <g id="Layer_1-2" data-name="Layer 1">
           <g>
             <path
@@ -104,7 +126,7 @@ const Loader = () => {
         </g>
       </motion.svg>
     </motion.div>,
-    document.getElementById('portals')
+    document.getElementById("portals"),
   );
 };
 

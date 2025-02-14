@@ -1,8 +1,16 @@
-import React from 'react';
-import Card from '../Card/Card';
-import InfoPill from '../InfoPill/InfoPill';
+import React from "react";
+import Card from "../Card/Card";
+import InfoPill from "../InfoPill/InfoPill";
 
-const ProjectCard = ({ imgSrc, imgAlt, head, subHead, lineDesc, pointDesc, skills }) => {
+const ProjectCard = ({
+  imgSrc,
+  imgAlt,
+  head,
+  subHead,
+  lineDesc,
+  pointDesc,
+  skills,
+}) => {
   return (
     <Card className="bg-black">
       <div className="img-vignette">

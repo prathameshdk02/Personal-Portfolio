@@ -1,5 +1,5 @@
 /* Custom Tailwind Classes for Use. */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap");
 
 html {
   @apply scroll-smooth;
@@ -56,7 +56,11 @@ html {
 .glassy-slide-down {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
-  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 50%, rgba(255, 255, 255, 0) 75%);
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 1) 50%,
+    rgba(255, 255, 255, 0) 75%
+  );
 }
 
 /* Card Related Styles */
@@ -86,7 +90,11 @@ html {
 
 .img-vignette::after {
   @apply absolute w-full h-full top-0 left-0 content-[""];
-  background: radial-gradient(circle, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 100%);
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, 0) 40%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
 }
 
 /* CardFlow Styling */
@@ -99,7 +107,7 @@ html {
 }
 
 .cardflow-forblur:before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
