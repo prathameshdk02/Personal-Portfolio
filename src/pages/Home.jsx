@@ -127,7 +127,7 @@ const Home = ({ isMobile }) => {
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: animationDelay + 1 }}
-                className="text-5xl lg:text-[3.25rem] xl:text-6xl text-primaryhead font-bold !mb-2">
+                className="text-5xl lg:text-[3.25rem] xl:text-6xl text-primaryhead font-bold">
                 Prathamesh Kadve
               </motion.h1>
               <motion.div

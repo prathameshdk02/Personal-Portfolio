@@ -1,15 +1,17 @@
 /* Custom Tailwind Classes for Use. */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
 
-html{
+html {
   @apply scroll-smooth;
 }
 
 body {
   @apply min-h-svh bg-black;
+  font-family: "Nunito", serif;
 }
 
 /* Preloader Styling */
-#preloader{
+#preloader {
   @apply fixed top-1/2 left-1/2 z-10 flex justify-center items-center bg-black rounded-full;
 }
 
@@ -20,13 +22,12 @@ body {
   @apply min-h-svh flex justify-center items-center scroll-smooth;
 }
 
-
 /* Scrollbar styling */
-::-webkit-scrollbar{
+::-webkit-scrollbar {
   @apply w-4;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
   @apply bg-secondaryhead rounded-md;
 }
 
@@ -35,13 +36,13 @@ body {
 }
 
 /* Firefox Specific */
-html{
+html {
   scrollbar-width: 1rem;
   scrollbar-color: rgb(var(--secondaryhead)) rgb(var(--glassy-edge));
 }
 
 /* Hero Section Styling */
-.hero-button{
+.hero-button {
   @apply bg-white/15 py-3 px-5 rounded-lg mr-4 border-2 border-transparent hover:border-white/15 hover:bg-inherit;
 }
 
@@ -49,7 +50,7 @@ html{
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   /* background: linear-gradient(146deg, rgba(0, 0, 0, 1) 30%, rgba(72, 72, 72, 0.2) 70%); */
-  background-color: rgba(90,90,90,0.1);
+  background-color: rgba(90, 90, 90, 0.1);
 }
 
 .glassy-slide-down {
@@ -59,53 +60,51 @@ html{
 }
 
 /* Card Related Styles */
-.card{
+.card {
   @apply p-6 rounded-xl border-2 border-glassyedge cursor-pointer;
 }
 
-.glassy-card{
+.glassy-card {
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
-
-
 /* Double Tap ProTip */
-.protip-mouse-body{
+.protip-mouse-body {
   @apply block w-6 h-9 border-2 border-primaryhead rounded-full relative mx-auto;
   @apply before:content-[""] before:absolute before:h-2 before:w-1 before:bg-primaryhead before:top-1 before:left-1/2 before:-translate-x-1/2 before:rounded-full;
 }
 
 /* Projects Section */
-.project-img{
+.project-img {
   @apply w-full h-full object-cover;
 }
 
-.img-vignette{
+.img-vignette {
   @apply relative;
 }
 
-.img-vignette::after{
+.img-vignette::after {
   @apply absolute w-full h-full top-0 left-0 content-[""];
   background: radial-gradient(circle, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 100%);
 }
 
 /* CardFlow Styling */
-.cardflow-button{
+.cardflow-button {
   @apply rounded-full p-2 grid place-items-center bg-glassyedge;
 }
 
-.cardflow-shadow{
+.cardflow-shadow {
   @apply rounded-2xl shadow-[0px_0px_50px_0px_black];
 }
 
-.cardflow-forblur:before{
+.cardflow-forblur:before {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: rgba(0,0,0,0.2);
+  background-color: rgba(0, 0, 0, 0.2);
   z-index: 10;
 }
