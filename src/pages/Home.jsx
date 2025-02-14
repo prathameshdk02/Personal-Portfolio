@@ -12,8 +12,12 @@ import { fadeIn, pulsate, verticalBob } from '../styles/motion/animations';
 import HomeContext from '../context/HomeContext';
 
 import Card from '../components/ui/Card/Card';
-import InfoPill from '../components/ui/InfoPill/InfoPill';
 import Timeline, { TimeElement } from '../components/ui/Timeline/Timeline';
+import InfoPill from '../components/ui/InfoPill/InfoPill';
+import CardFlow from '../components/ui/CardFlow/CardFlow';
+
+import { PROJECTS } from '../data/projects';
+import ProjectCard from '../components/ui/ProjectCard/ProjectCard';
 
 let SECTION_COUNT = 0;
 
@@ -21,8 +25,9 @@ const Home = ({ isMobile }) => {
   const { homeCtx, setHomeCtx } = useContext(HomeContext);
   const { currentSection, doSmoothScroll } = homeCtx;
 
-  const handleDTSectionChange = useDebounce(() => {
-    setHomeCtx((prevHomeCtx) => {
+  const handleDTSectionChange = useDebounce((e) => {
+    console.log(e.target);
+    setHomeCtx((prevHomeCtx) => { 
       if (prevHomeCtx.currentSection < SECTION_COUNT) {
         return { ...prevHomeCtx, currentSection: prevHomeCtx.currentSection + 1, doSmoothScroll: true };
       }
@@ -63,6 +68,8 @@ const Home = ({ isMobile }) => {
       intersectionObs.observe(section);
     });
 
+    // Projects
+
     return () => {
       sections.forEach((section) => intersectionObs.unobserve(section));
     };
@@ -93,6 +100,10 @@ const Home = ({ isMobile }) => {
     anchor.download = 'Prathamesh-Kadve-Resume-2025.pdf';
     anchor.click();
   };
+
+  const projectCards = PROJECTS.map((project, index) => (
+    <ProjectCard key={index + 1} {...project}></ProjectCard>
+  ));
 
   // Prevent Markup Rerendering even if the currentSection has changed.
   const homeMarkup = useMemo(() => {
@@ -317,7 +328,7 @@ const Home = ({ isMobile }) => {
         <section
           onDoubleClick={handleDTSectionChange}
           id="home-section-4"
-          className="home-4 min-h-svh flex flex-col gap-10 pt-12 text-slate-100">
+          className="home-4 min-h-svh flex flex-col pt-12 md:gap-6 text-slate-100">
           <motion.h2
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -327,88 +338,31 @@ const Home = ({ isMobile }) => {
             Projects
           </motion.h2>
 
-          <section className="grid grid-cols-1 place-items-center md:grid-cols-2 gap-4 ">
-            <Card className="project-card">
-              <div className="img-vignette">
-                <img className="project-img" src="/images/finance.png" alt="Finance Dashboard Image" />
-              </div>
-              <h2 className="text-xl font-medium">Finance Dashboard</h2>
-              <h3 className="text-sm text-secondarytext font-medium">Sciative Solutions</h3>
-              <p>Developed a dashboard for automated invoice generation.</p>
+          {/* <section className="grid grid-cols-1 place-items-center md:grid-cols-2 gap-4 ">
+            {PROJECTS.map(project => <ProjectCard {...project} ></ProjectCard>)}
+          </section> */}
 
-              <ul className="text-primarytext text-base list-disc ps-5">
-                <li>Helped save 50% of the time spent manually executing SQL Queries to generate invoices</li>
-                <li>
-                  The dashboard assisted in generating different invoice types, with additional support for
-                  automated annexure generation.
-                </li>
-              </ul>
+          <CardFlow cards={projectCards} innerWidth={innerWidth} />
+        </section>
 
-              <div className="!mt-3">
-                <InfoPill>On-Site</InfoPill>
-                <InfoPill>Stipend</InfoPill>
-              </div>
-            </Card>
+        {/* Skills Section */}
+        <section
+          onDoubleClick={handleDTSectionChange}
+          id="home-section-5"
+          className="home-5 min-h-svh flex flex-col pt-12 md:gap-6 text-slate-100">
+          <motion.h2
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+            viewport={{ once: true, amount: 1 }}
+            className="text-3xl lg:text-[2rem] xl:text-4xl font-bold">
+            Skills
+          </motion.h2>
 
-            {/* Signature Based Ransomware Detection */}
-            <Card className="project-card">
-              <div className="img-vignette">
-                <img className="project-img" src="/images/sbrd.png" alt="SBRDS Image" />
-              </div>
-              <h2 className="text-xl font-medium">Signature Based Ransomware Detection</h2>
-              <h3 className="text-sm text-secondarytext font-medium">Academic Project</h3>
-
-              <p>
-                Developed a signature-based ransomware detection system to identify potential ransomware
-                samples.
-              </p>
-
-              <ul className="text-primarytext text-base list-disc ps-5">
-                <li>Helped detect potential ransomware signatures in local files.</li>
-                <li>
-                  Extracted ransomware signatures from over 36555 live ransomware samples for creating the
-                  signature database.
-                </li>
-              </ul>
-
-              <div className="!mt-3">
-                <InfoPill>On-Site</InfoPill>
-                <InfoPill>Stipend</InfoPill>
-              </div>
-            </Card>
-
-            {/* Sorting Algorithm Visualizer */}
-            <Card className="project-card">
-              <div className="img-vignette">
-                <img
-                  className="project-img"
-                  src="/images/algo.png"
-                  alt="Sorting Algorithm Visualizer Image"
-                />
-              </div>
-              <h2 className="text-xl font-medium">Sorting Algorithm Visualizer</h2>
-              <h3 className="text-sm text-secondarytext font-medium">Academic Project</h3>
-
-              <p>Worked upon a web application for visualizing Sorting Algorithms</p>
-
-              <ul className="text-primarytext text-base list-disc ps-5">
-                <li>Gained a deeper intuition for sorting algorithms like MergeSort and InsertionSort</li>
-                <li>
-                  Collaborated within a team of four people, understanding their opinions & tailoring the
-                  application as per suggestions
-                </li>
-              </ul>
-
-              <div className="!mt-3">
-                <InfoPill>On-Site</InfoPill>
-                <InfoPill>Stipend</InfoPill>
-              </div>
-            </Card>
-          </section>
         </section>
       </>
     );
-  }, []);
+  }, [innerWidth]);
 
   return homeMarkup;
 };

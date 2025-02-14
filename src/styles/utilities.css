@@ -40,7 +40,6 @@ html{
   scrollbar-color: rgb(var(--secondaryhead)) rgb(var(--glassy-edge));
 }
 
-
 /* Hero Section Styling */
 .hero-button{
   @apply bg-white/15 py-3 px-5 rounded-lg mr-4 border-2 border-transparent hover:border-white/15 hover:bg-inherit;
@@ -89,4 +88,24 @@ html{
 .img-vignette::after{
   @apply absolute w-full h-full top-0 left-0 content-[""];
   background: radial-gradient(circle, rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.7) 100%);
+}
+
+/* CardFlow Styling */
+.cardflow-button{
+  @apply rounded-full p-2 grid place-items-center bg-glassyedge;
+}
+
+.cardflow-shadow{
+  @apply rounded-2xl shadow-[0px_0px_50px_0px_black];
+}
+
+.cardflow-forblur:before{
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.2);
+  z-index: 10;
 }

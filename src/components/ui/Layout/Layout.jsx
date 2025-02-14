@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useRef } from 'react';
 
+import { MOBILE_BREAKPOINT } from '../../../config/layoutConfig';
+
 import Sidebar from '../Sidebar/Sidebar';
 import SocialList from '../SocialList/SocialList';
 import HomeContext from '../../../context/HomeContext';
 
-const Layout = ({ isMobile, children }) => {
+const Layout = ({ innerWidth, children }) => {
+  const isMobile = innerWidth < MOBILE_BREAKPOINT;
   const { setHomeCtx } = useContext(HomeContext);
   const mainRef = useRef();
 
@@ -12,7 +15,7 @@ const Layout = ({ isMobile, children }) => {
     setHomeCtx((prevHomeCtx) => {
       return { ...prevHomeCtx, mainSectionWidth: mainRef.current.getBoundingClientRect().width };
     });
-  }, []);
+  }, [innerWidth]);
 
   return (
     <main

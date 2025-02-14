@@ -11,8 +11,7 @@ import HomeContext from '../../../context/HomeContext';
 
 import * as NAV from '../../../config/navConfig';
 
-const BubbleSidebar = () => {
-  const innerWidth = window.innerWidth;
+const BubbleSidebar = ({ innerWidth }) => {
   const { homeCtx, setHomeCtx } = useContext(HomeContext);
   const { mainSectionWidth, currentSection } = homeCtx;
   const rightOffset = Math.round((innerWidth - mainSectionWidth) / 2);

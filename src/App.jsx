@@ -11,10 +11,11 @@ import BubbleSidebar from './components/ui/BubbleSidebar/BubbleSidebar';
 const MOBILE_BREAKPOINT = 768;
 
 function App() {
-  const [isMobile, setIsMobile] = useState(window.innerWidth < MOBILE_BREAKPOINT);
+  const [innerWidth, setInnerWidth] = useState(window.innerWidth);
+  const isMobile = window.innerWidth < MOBILE_BREAKPOINT;
 
-  const handleResize = useDebounce(() => {
-    setIsMobile(window.innerWidth < MOBILE_BREAKPOINT);
+  const handleResize = useDebounce((e) => {
+    setInnerWidth(window.innerWidth);
   }, 400);
 
   useEffect(() => {
@@ -22,15 +23,15 @@ function App() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
-  }, [isMobile]);
+  }, [innerWidth]);
 
   return (
     <>
       <HomeContextProvider>
-        <Layout isMobile={isMobile}>
-          <Home />
+        <Layout innerWidth={innerWidth}>
+          <Home innerWidth={innerWidth} />
         </Layout>
-        <BubbleSidebar />
+        <BubbleSidebar innerWidth={innerWidth} />
       </HomeContextProvider>
     </>
   );
